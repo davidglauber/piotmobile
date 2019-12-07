@@ -29,14 +29,19 @@ class Onboarding extends React.Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     let e = this;
 
-    firebase.auth().onAuthStateChanged(function(user) {
-      if(user.uid == null) {
-      } else {
-        e.props.navigation.navigate('Home')
-      }
+    await firebase.auth().onAuthStateChanged(function(user) {
+    
+        if(user == null) {
+          alert('id nulo')
+          e.props.navigation.navigate('Login')
+        } 
+        if (user !== null) {
+          e.props.navigation.navigate('Home')
+        }
+
     })
   }
 

@@ -30,22 +30,26 @@ class Login extends React.Component {
 
   login() {
         
-      if( this.state.senha == this.state.confirmarSenha ){ 
 
-      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha);
+            try {
+                if( this.state.senha == this.state.confirmarSenha ){ 
+                  firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha);
+                
+
+                  this.props.navigation.navigate('Home')
+                    alert('Logado!')
+                } else {
+                    alert('As senhas não coincidem')
+                }
+
+
+            } catch (error) {
+                console.log(error)
+            }
       
-      alert('Logado!')
-
-      this.props.navigation.navigate('Home')
-
-      } else {
-        alert('As senhas não coincidem')
-      }
   }
 
   render() {
-    const { navigation } = this.props;
-
     return (
       <Block flex middle>
         <StatusBar hidden />

@@ -2,13 +2,14 @@ import React from 'react';
 import { withNavigation } from 'react-navigation';
 import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
-
+import firebase from '../screens/firebase/firebase'; 
 import Icon from './Icon';
 import Input from './Input';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
 
 const { height, width } = Dimensions.get('window');
+
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
 const BellButton = ({isWhite, style, navigation}) => (
@@ -50,6 +51,22 @@ class Header extends React.Component {
     const { back, navigation } = this.props;
     return (back ? navigation.goBack() : navigation.openDrawer());
   }
+
+  async logout() {
+    let e = this;
+
+    try {
+
+      await firebase.auth().onAuthStateChanged(function(user) {
+        e.props.navigation.navigate('Login')
+        firebase.auth().signOut()
+      })
+    } catch (error) {
+        alert('Algo deu errado ao fazer logout')
+    }
+
+  }
+
   renderRight = () => {
     const { white, title, navigation } = this.props;
     const { routeName } = navigation.state;
@@ -63,10 +80,18 @@ class Header extends React.Component {
 
     switch (routeName) {
       case 'Home':
-        return ([
-          <BellButton key='chat-home' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-home' navigation={navigation} isWhite={white} />
-        ]);
+        return (
+          <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
+            <Icon
+              family="ArgonExtra"
+              size={16}
+              name="bell"
+              color='black'
+            />
+            <Block />
+          </TouchableOpacity>
+        );
+
       case 'Deals':
         return ([
           <BellButton key='chat-categories' navigation={navigation} />,

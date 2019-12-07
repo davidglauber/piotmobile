@@ -7,6 +7,7 @@ import {
 } from "react-navigation";
 
 import { Block } from "galio-framework";
+import firebase from '../screens/firebase/firebase';
 
 // screens
 import Home from "../screens/Home";
@@ -125,7 +126,7 @@ const HomeStack = createStackNavigator(
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        header: <Header search options title="Home" navigation={navigation} />
+        header: <Header title="Tela Principal" />
       })
     },
     Pro: {
@@ -162,19 +163,17 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
+    Login: {
+      screen: LoginStack,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
     Profile: {
       screen: ProfileStack,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Profile" title="Profile" />
-        )
-      })
-    },
-    Login: {
-      screen: LoginStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Login" title="Login" />
         )
       })
     },
