@@ -14,10 +14,9 @@ import {Icon, Input} from "../components";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
 import firebase from './firebase/firebase';
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 
-class Onboarding extends React.Component {
+class Login extends React.Component {
 
 
   constructor(props) {
@@ -29,26 +28,15 @@ class Onboarding extends React.Component {
     }
   }
 
-  componentDidMount() {
-    let e = this;
-
-    firebase.auth().onAuthStateChanged(function(user) {
-      if(user.uid == null) {
-      } else {
-        e.props.navigation.navigate('Home')
-      }
-    })
-  }
-
-  cadastro() {
+  login() {
         
       if( this.state.senha == this.state.confirmarSenha ){ 
 
-          firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.senha);
-          
-          alert('Conta cadastrada!')
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha);
+      
+      alert('Logado!')
 
-                this.props.navigation.navigate('Login')
+      this.props.navigation.navigate('Home')
 
       } else {
         alert('As senhas não coincidem')
@@ -79,7 +67,7 @@ class Onboarding extends React.Component {
               <Block flex>
                 <Block flex={0.17} middle>
                   <Text color="#8898AA" size={12}>
-                    Cadastre-se abaixo
+                    Faça seu login e aproveite a plataforma!
                   </Text>
                 </Block>
                 <Block flex center>
@@ -143,20 +131,11 @@ class Onboarding extends React.Component {
                         }
                       />
                     </Block>
-                  
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
-                    <Text style={{
-                      color: argonTheme.COLORS.PRIMARY,
-                      fontWeight: "800",
-                      fontSize: 15
-                      }}>Já tem uma conta? Entre agora!</Text>
-
-                  </TouchableOpacity>
                     
                     <Block middle>
-                      <Button onPress={() => this.cadastro()} color="primary" style={styles.createButton}>
+                      <Button onPress={() => this.login()} color="primary" style={styles.createButton}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
-                          Criar conta
+                          Logar
                         </Text>
                       </Button>
                     </Block>
@@ -224,4 +203,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Onboarding;
+export default Login;

@@ -16,6 +16,8 @@ import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
 import Articles from "../screens/Articles";
+import Login from "../screens/login";
+
 // drawer
 import Menu from "./Menu";
 import DrawerItem from "../components/DrawerItem";
@@ -107,6 +109,17 @@ const ProfileStack = createStackNavigator(
   }
 );
 
+const LoginStack = createStackNavigator(
+  {
+    Login: {
+      screen: Login,
+      navigationOptions: ({ navigation }) => ({
+        headerTransparent: true
+      })
+    }
+  }
+);
+
 const HomeStack = createStackNavigator(
   {
     Home: {
@@ -154,6 +167,14 @@ const AppStack = createDrawerNavigator(
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Profile" title="Profile" />
+        )
+      })
+    },
+    Login: {
+      screen: LoginStack,
+      navigationOptions: navOpt => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="Login" title="Login" />
         )
       })
     },

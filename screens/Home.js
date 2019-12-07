@@ -24,7 +24,7 @@ class Home extends React.Component {
 
 
   componentDidMount() {
-    /* let e = this;
+    let e = this;
 
     var emailDoUsuario = '';
     var id = '';
@@ -118,7 +118,7 @@ class Home extends React.Component {
   } catch(error) {
     console.log(error)
   }
-  */
+  
   } 
   
   
