@@ -5,6 +5,7 @@ import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 import firebase from '../screens/firebase/firebase'; 
 import Icon from './Icon';
 import Input from './Input';
+import { Ionicons } from '@expo/vector-icons';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
 
@@ -52,18 +53,21 @@ class Header extends React.Component {
     return (back ? navigation.goBack() : navigation.openDrawer());
   }
 
-  async logout() {
+  logout() {
     let e = this;
 
-    try {
 
-      await firebase.auth().onAuthStateChanged(function(user) {
-        e.props.navigation.navigate('Login')
-        firebase.auth().signOut()
+      firebase.auth().onAuthStateChanged(function(user) {
+        
+        
+        if(user == null) {
+          return null
+        } 
+        if (user !== null) {
+          firebase.auth().signOut()
+          e.props.navigation.navigate('Login')
+        }
       })
-    } catch (error) {
-        alert('Algo deu errado ao fazer logout')
-    }
 
   }
 
@@ -82,11 +86,9 @@ class Header extends React.Component {
       case 'Home':
         return (
           <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
-            <Icon
-              family="ArgonExtra"
-              size={16}
-              name="bell"
-              color='black'
+            <Ionicons
+              size={26}
+              name="ios-exit"
             />
             <Block />
           </TouchableOpacity>

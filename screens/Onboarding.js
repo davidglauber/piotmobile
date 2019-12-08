@@ -35,8 +35,7 @@ class Onboarding extends React.Component {
     await firebase.auth().onAuthStateChanged(function(user) {
     
         if(user == null) {
-          alert('id nulo')
-          e.props.navigation.navigate('Login')
+          e.props.navigation.navigate('Onboarding')
         } 
         if (user !== null) {
           e.props.navigation.navigate('Home')
