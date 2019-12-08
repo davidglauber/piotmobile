@@ -89,6 +89,7 @@ class Header extends React.Component {
             <Ionicons
               size={26}
               name="ios-exit"
+              style={{color:'blue'}}
             />
             <Block />
           </TouchableOpacity>

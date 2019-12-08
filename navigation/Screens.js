@@ -11,6 +11,8 @@ import firebase from '../screens/firebase/firebase';
 
 // screens
 import Home from "../screens/Home";
+import Lampadas from '../screens/lampadas/lampadas';
+import Local from '../screens/local';
 import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
@@ -121,6 +123,29 @@ const LoginStack = createStackNavigator(
   }
 );
 
+const LocalStack = createStackNavigator(
+  {
+    Local: {
+      screen: Local,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Local" />
+      })
+    }
+  }
+);
+
+
+const LampStack = createStackNavigator(
+  {
+    Lampadas: {
+      screen: Lampadas,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Lâmpadas" />
+      })
+    }
+  }
+);
+
 const HomeStack = createStackNavigator(
   {
     Home: {
@@ -155,11 +180,23 @@ const AppStack = createDrawerNavigator(
         drawerLabel: () => {}
       }
     },
+    Local: {
+      screen: Local,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    Lampadas: {
+      screen: LampStack,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
     Home: {
       screen: HomeStack,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} title="Home" />
+          <DrawerItem focused={focused} title="Tela Principal" />
         )
       })
     },
