@@ -11,6 +11,10 @@ import firebase from '../screens/firebase/firebase';
 
 // screens
 import Home from "../screens/Home";
+import Umidade from '../screens/umidade/umidade';
+import NivelAgua from '../screens/nivelagua/nivelagua';
+import Presenca from '../screens/presenca/presenca';
+import Agua from '../screens/agua/agua';
 import Lampadas from '../screens/lampadas/lampadas';
 import Temperatura from '../screens/temperatura/temperatura';
 import Local from '../screens/local';
@@ -135,6 +139,51 @@ const TempStack = createStackNavigator(
   }
 );
 
+const PresStack = createStackNavigator(
+  {
+    Presenca: {
+      screen: Presenca,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Sensores de Presenca" />
+      })
+    }
+  }
+);
+
+const AguaStack = createStackNavigator(
+  {
+    Agua: {
+      screen: Agua,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Sensores de Água" />
+      })
+    }
+  }
+);
+
+const NivelStack = createStackNavigator(
+  {
+    NivelAgua: {
+      screen: NivelAgua,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Sensores de Nível de Água" />
+      })
+    }
+  }
+);
+
+const UmidadeStack = createStackNavigator(
+  {
+    Umidade: {
+      screen: Umidade,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Sensores de Umidade" />
+      })
+    }
+  }
+);
+
+
 const LocalStack = createStackNavigator(
   {
     Local: {
@@ -188,6 +237,30 @@ const AppStack = createDrawerNavigator(
   {
     Onboarding: {
       screen: Onboarding,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    Presenca: {
+      screen: PresStack,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    NivelAgua: {
+      screen: NivelAgua,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    Agua: {
+      screen: AguaStack,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    Umidade: {
+      screen: UmidadeStack,
       navigationOptions: {
         drawerLabel: () => {}
       }

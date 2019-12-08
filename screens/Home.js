@@ -127,12 +127,12 @@ class Home extends React.Component {
 
                   {/*presença*/}
                   <Block card flex style={cardContainer2}>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Local')}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Presenca')}>
                       <Block flex style={{width: 100}}>
                         <Image source={require('./presenca.png')} style={imageStyles} />
                       </Block>
                     </TouchableWithoutFeedback>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Local')}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Presenca')}>
                       <Block flex space="between" style={styles.cardDescription}>
                         <Text size={14} style={styles.cardTitle}>Sensores de Presença</Text>
                         <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Sensores</Text>
@@ -151,6 +151,55 @@ class Home extends React.Component {
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
                       <Block flex space="between" style={styles.cardDescription}>
                         <Text size={14} style={styles.cardTitle}>Sensores de Temperatura</Text>
+                        <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Sensores</Text>
+                      </Block>
+                    </TouchableWithoutFeedback>
+                  </Block>
+
+
+
+                  {/*sensor de água*/}
+                  <Block card flex style={cardContainer2}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Agua')}>
+                      <Block flex style={{width: 100}}>
+                        <Image source={require('./drop.png')} style={imageStyles} />
+                      </Block>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Agua')}>
+                      <Block flex space="between" style={styles.cardDescription}>
+                        <Text size={14} style={styles.cardTitle}>Sensores de Água</Text>
+                        <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Sensores</Text>
+                      </Block>
+                    </TouchableWithoutFeedback>
+                  </Block>
+
+
+                   {/*sensor de umidade*/}
+                   <Block card flex style={cardContainer2}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Umidade')}>
+                      <Block flex style={{width: 100}}>
+                        <Image source={require('./umidade.png')} style={imageStyles} />
+                      </Block>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Umidade')}>
+                      <Block flex space="between" style={styles.cardDescription}>
+                        <Text size={14} style={styles.cardTitle}>Sensores de Umidade</Text>
+                        <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Sensores</Text>
+                      </Block>
+                    </TouchableWithoutFeedback>
+                  </Block>
+
+
+                   {/*sensor de nível de água*/}
+                   <Block card flex style={cardContainer2}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('NivelAgua')}>
+                      <Block flex style={{width: 100}}>
+                        <Image source={require('./flood.png')} style={imageStyles} />
+                      </Block>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('NivelAgua')}>
+                      <Block flex space="between" style={styles.cardDescription}>
+                        <Text size={14} style={styles.cardTitle}>Sensores de Nível de Água</Text>
                         <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Sensores</Text>
                       </Block>
                     </TouchableWithoutFeedback>
