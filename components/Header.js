@@ -57,13 +57,13 @@ class Header extends React.Component {
     let e = this;
 
 
-      firebase.auth().onAuthStateChanged(function(user) {
-        
-        
-        if(user == null) {
-          return null
+    firebase.auth().onAuthStateChanged(function(user) {
+
+        console.log('ID do headereee: ' + user)
+        if(user == null || user == undefined) {
+          e.props.navigation.navigate('Login')
         } 
-        if (user !== null) {
+        if (user !== null || user !== undefined) {
           firebase.auth().signOut()
           e.props.navigation.navigate('Login')
         }

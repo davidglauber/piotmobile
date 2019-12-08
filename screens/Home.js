@@ -29,25 +29,30 @@ class Home extends React.Component {
     var lugaresDisponiveis = this.state.lugaresDisponiveis
 
       await firebase.auth().onAuthStateChanged(function(user) {
-      
-        let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/locais`)
-        
-        firebaseGET.on('value', (snap) => {
 
-        var lugares = [];
-        snap.forEach((child) => {
+        if(  user !== null ) {
+          let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/locais`)
+        
+          firebaseGET.on('value', (snap) => {
+  
+          var lugares = [];
+          snap.forEach((child) => {
+            
+              lugares.push({
+                location: child.val().location,
+                url: child.val().url,
+              });
+  
+          });
           
-            lugares.push({
-              location: child.val().location,
-              url: child.val().url,
-            });
-
-        });
-        
-        e.setState({
-          lugaresDisponiveis: lugares
-        });
-       });
+          e.setState({
+            lugaresDisponiveis: lugares
+          });
+         });
+        } else {
+          e.props.navigation.navigate('Login')
+        }
+      
 
       })
       console.log('Lista de locais: ' + lugaresDisponiveis)

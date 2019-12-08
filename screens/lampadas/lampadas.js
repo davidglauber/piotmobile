@@ -27,7 +27,10 @@ class Lampadas extends React.Component {
     var lampadasDisponiveis = this.state.lampadasDisponiveis;
 
       await firebase.auth().onAuthStateChanged(function(user) {
-      
+        
+        if ( user == null ) { 
+          e.props.navigation.navigate('Login')
+        }
         let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/lampadas`)
         
         firebaseGET.on('value', (snap) => {

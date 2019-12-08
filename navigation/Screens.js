@@ -172,24 +172,24 @@ const NivelStack = createStackNavigator(
   }
 );
 
-const UmidadeStack = createStackNavigator(
-  {
-    Umidade: {
-      screen: Umidade,
-      navigationOptions: ({ navigation }) => ({
-        header: <Header title="Sensores de Umidade" />
-      })
-    }
-  }
-);
-
-
 const LocalStack = createStackNavigator(
   {
     Local: {
       screen: Local,
       navigationOptions: ({ navigation }) => ({
         header: <Header title="Local" />
+      })
+    }
+  }
+);
+
+
+const UmidadeStack = createStackNavigator(
+  {
+    Umidade: {
+      screen: Umidade,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Sensores de Umidade" />
       })
     }
   }
