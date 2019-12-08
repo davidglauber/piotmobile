@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
 import Icon from "./Icon";
+import { Ionicons } from '@expo/vector-icons';
 import argonTheme from "../constants/Theme";
 
 class DrawerItem extends React.Component {
@@ -44,6 +45,14 @@ class DrawerItem extends React.Component {
             family="ArgonExtra"
             size={12}
             color={focused ? "white" : argonTheme.COLORS.WARNING}
+          />
+        );
+      case "Relatórios":
+        return (
+          <Ionicons
+              size={26}
+              name="ios-browsers"
+              style={{color:'#fabe2b'}}
           />
         );
       case "Account":

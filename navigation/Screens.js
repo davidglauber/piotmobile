@@ -13,6 +13,7 @@ import firebase from '../screens/firebase/firebase';
 import Home from "../screens/Home";
 import Umidade from '../screens/umidade/umidade';
 import NivelAgua from '../screens/nivelagua/nivelagua';
+import Relatorio from '../screens/relatorios';
 import Presenca from '../screens/presenca/presenca';
 import Agua from '../screens/agua/agua';
 import Lampadas from '../screens/lampadas/lampadas';
@@ -134,6 +135,17 @@ const TempStack = createStackNavigator(
       screen: Temperatura,
       navigationOptions: ({ navigation }) => ({
         header: <Header title="Sensores de Temperatura" />
+      })
+    }
+  }
+);
+
+const RelatorioStack = createStackNavigator(
+  {
+    Relatorio: {
+      screen: Relatorio,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Relatórios de Gastos" />
       })
     }
   }
@@ -287,7 +299,15 @@ const AppStack = createDrawerNavigator(
       screen: HomeStack,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} title="Tela Principal" />
+          <DrawerItem focused={focused} screen="Home" title="Home" />
+        )
+      })
+    },
+    Relatorio: {
+      screen: RelatorioStack,
+      navigationOptions: navOpt => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="Relatórios" title="Relatórios" />
         )
       })
     },
