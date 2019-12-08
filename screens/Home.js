@@ -143,12 +143,12 @@ class Home extends React.Component {
 
                   {/*temperatura*/}
                   <Block card flex style={cardContainer2}>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Local')}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
                       <Block flex style={{width: 100}}>
                         <Image source={require('./cold.png')} style={imageStyles} />
                       </Block>
                     </TouchableWithoutFeedback>
-                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Local')}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
                       <Block flex space="between" style={styles.cardDescription}>
                         <Text size={14} style={styles.cardTitle}>Sensores de Temperatura</Text>
                         <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Sensores</Text>

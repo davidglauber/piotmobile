@@ -12,6 +12,7 @@ import firebase from '../screens/firebase/firebase';
 // screens
 import Home from "../screens/Home";
 import Lampadas from '../screens/lampadas/lampadas';
+import Temperatura from '../screens/temperatura/temperatura';
 import Local from '../screens/local';
 import Onboarding from "../screens/Onboarding";
 import Pro from "../screens/Pro";
@@ -123,6 +124,17 @@ const LoginStack = createStackNavigator(
   }
 );
 
+const TempStack = createStackNavigator(
+  {
+    Temperatura: {
+      screen: Temperatura,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Sensores de Temperatura" />
+      })
+    }
+  }
+);
+
 const LocalStack = createStackNavigator(
   {
     Local: {
@@ -176,6 +188,12 @@ const AppStack = createDrawerNavigator(
   {
     Onboarding: {
       screen: Onboarding,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    Temperatura: {
+      screen: TempStack,
       navigationOptions: {
         drawerLabel: () => {}
       }

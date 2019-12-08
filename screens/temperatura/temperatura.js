@@ -9,42 +9,41 @@ import firebase from '../firebase/firebase';
 
 const { width } = Dimensions.get('screen');
 
-class Lampadas extends React.Component {
+class Temperatura extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      lampadasDisponiveis:[],
-      lugaresDisponiveis:[],
-      selecionado:''
+        temperatura: [],
+        lugaresDisponiveis: []
     }
   }
 
 
   async componentDidMount() {
     let e = this;
-    var lugaresDisponiveis = this.state.lugaresDisponiveis
-    var lampadasDisponiveis = this.state.lampadasDisponiveis;
+    var temperatura = this.state.lampadasDisponiveis;
+    var lugaresDisponiveis = this.state.lugaresDisponiveis;
 
       await firebase.auth().onAuthStateChanged(function(user) {
       
-        let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/lampadas`)
+        let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/temperatura`)
         
         firebaseGET.on('value', (snap) => {
 
-        var lamps = [];
+        var temp = [];
         snap.forEach((child) => {
           
-            lamps.push({
+            temp.push({
               location: child.val().location,
-              status: child.val().status,
+              temperatura: child.val().temperatura,
               id: child.val().id
             });
 
         });
         
         e.setState({
-          lampadasDisponiveis: lamps
+          temperatura: temp
         });
        });
 
@@ -77,25 +76,10 @@ class Lampadas extends React.Component {
   } 
   
 
-  ligarLampada(e) {
-    const lampadasDisponiveis = this.state.lampadasDisponiveis;
-    firebase.auth().onAuthStateChanged(function(user) {
-      firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'ON'})
-    })
-
-  }
-
-  desligarLampada(e) {
-    const lampadasDisponiveis = this.state.lampadasDisponiveis;
-    firebase.auth().onAuthStateChanged(function(user) {
-      firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'OFF'})
-    })
-
-  }
 
   onValueChangePlace = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
-      firebase.database().ref(`/usuarios/${user.uid}/lampadas/${c}`).update({location: e})
+      firebase.database().ref(`/usuarios/${user.uid}/temperatura/${c}`).update({location: e})
     })
   }
   
@@ -112,7 +96,7 @@ class Lampadas extends React.Component {
       horizontal ? styles.horizontalStyles : styles.verticalStyles,
       styles.shadow
     ];
-    const lampadasDisponiveis = this.state.lampadasDisponiveis;
+    const temperatura = this.state.temperatura;
     const lugaresDisponiveis = this.state.lugaresDisponiveis;
 
     return (
@@ -121,20 +105,18 @@ class Lampadas extends React.Component {
               contentContainerStyle={styles.articles}>
 
                 <FlatList
-                    data={lampadasDisponiveis}
+                    data={temperatura}
                     renderItem={({item}) =>
                 <View>
 
                     <Block flex row>
                         <Block card flex style={cardContainer}>
                           <TouchableWithoutFeedback>
+
                             <Block flex style={{width: 100}}>
-                            {item.status === 'ON' ? 
-                                <Image source={require('../lamp.png')} style={{width:100, height:150}} />
-                                : 
-                                <Image source={require('../lampOFF.png')} style={{width:100, height:150}} />
-                            }
+                                <Image source={require('../cold.png')} style={{width:100, height:150}} />
                             </Block>
+
                           </TouchableWithoutFeedback>
                           <TouchableWithoutFeedback>
                             <Block flex space="between" style={styles.cardDescription}>
@@ -153,19 +135,10 @@ class Lampadas extends React.Component {
                                   </Picker>
                               </View>
 
-                                <Text size={14} style={styles.cardTitle}>{item.location}</Text>
-                              
-                            <View style={{flexDirection:'row'}}>
-                             
-                              <TouchableOpacity onPress={() => this.ligarLampada(item.id)} style={{backgroundColor: '#a9c9d7', padding:5, borderRadius:5}}>
-                                    <Text style={{fontWeight:'bold', color: 'white', left:0}}>Ligar</Text>
-                              </TouchableOpacity>
+                                <Text size={14} style={styles.cardTitle}><Text style={{fontWeight:'bold'}}>Local atual:</Text> {item.location}</Text>
+                                <Text style={{fontWeight:'bold', color: 'black', left:0}}>Temperatura: {item.temperatura}</Text>
 
-                              <TouchableOpacity onPress={() => this.desligarLampada(item.id)} style={{backgroundColor: '#ff6124', padding:5, marginLeft:50, borderRadius:5}}>
-                                    <Text style={{fontWeight:'bold', color: 'white'}}>Desligar</Text>
-                              </TouchableOpacity>
-                              
-                            </View>
+
                             </Block>
                           </TouchableWithoutFeedback>
                         </Block>
@@ -243,4 +216,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Lampadas;
+export default Temperatura;
