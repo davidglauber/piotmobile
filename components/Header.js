@@ -61,7 +61,7 @@ class Header extends React.Component {
 
         console.log('ID do headereee: ' + user)
         if(user == null || user == undefined) {
-          e.props.navigation.navigate('Login')
+          console.log('id nulo no header')
         } 
         if (user !== null || user !== undefined) {
           firebase.auth().signOut()

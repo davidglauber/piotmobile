@@ -123,6 +123,15 @@ class Lampadas extends React.Component {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.articles}>
 
+              { lampadasDisponiveis.length == 0  ? 
+                <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+                  <Image style={{width:300, height: 300}} source={require('../404.gif')}/>
+
+
+                  <Text style={{color:'blue', fontWeight:'bold', fontSize:30}}>Página vazia!</Text>
+                </View>
+                :
+
                 <FlatList
                     data={lampadasDisponiveis}
                     renderItem={({item}) =>
@@ -176,6 +185,8 @@ class Lampadas extends React.Component {
 
                 </View>
                 } />
+
+              }
 
             </ScrollView>
     )
