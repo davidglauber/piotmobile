@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Image, StyleSheet, Text, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
+import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -26,11 +26,14 @@ class Home extends React.Component {
 
   async componentDidMount() {
     let e = this;
-    var lugaresDisponiveis = this.state.lugaresDisponiveis
+    var lugaresDisponiveis = this.state.lugaresDisponiveis;
+    const idUsuarioAtual = this.state.idUsuarioAtual;
 
       await firebase.auth().onAuthStateChanged(function(user) {
 
         if(  user !== null ) {
+          e.setState({idUsuarioAtual: user.uid})
+
           let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/locais`)
         
           firebaseGET.on('value', (snap) => {
@@ -58,7 +61,14 @@ class Home extends React.Component {
       console.log('Lista de locais: ' + lugaresDisponiveis)
   
   } 
-  
+
+
+  async copyText(e) {
+    await Clipboard.setString(e)
+
+
+    alert('Texto copiado!')
+  }
   
 
   renderArticles = () => {
@@ -80,7 +90,10 @@ class Home extends React.Component {
             <ScrollView
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.articles}>
-
+            
+            <TouchableOpacity onPress={() => this.copyText(this.state.idUsuarioAtual)}>
+              <Text style={{fontSize: 14, color:'#527fe2'}}>SEU ID: {this.state.idUsuarioAtual}</Text>
+            </TouchableOpacity>
                 <FlatList
                     data={lugaresDisponiveis}
                     renderItem={({item}) =>
