@@ -4,24 +4,315 @@ import {
   Dimensions,
   ScrollView,
   Image,
-  ImageBackground,
-  Platform
+  Picker,
+  View,
+  ImageBackground, 
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  Platform, 
+  FlatList
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
 import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
+import firebase from './firebase/firebase';
 
 const { width, height } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 
 class Local extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+        lampadas: [],
+        agua:[],
+        nivelagua:[],
+        presenca:[],
+        temperatura:[],
+        umidade:[],
+        lugares:[]
+    }
+  }
+
+
+  async componentDidMount() {
+    var lampadas = this.state.lampadas;
+    var agua = this.state.agua;
+    var nivelagua = this.state.nivelagua;
+    var presenca = this.state.presenca;
+    var temperatura = this.state.temperatura;
+    var umidade = this.state.umidade;
+    var lugares = this.state.lugares;
+
+    let e = this;
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/lampadas`)
+        
+      firebaseGET.on('value', (snap) => {
+
+      var lamps = [];
+      snap.forEach((child) => {
+        
+          lamps.push({
+            location: child.val().location,
+            status: child.val().status,
+            id: child.val().id
+          });
+
+      });
+      
+      e.setState({
+        lampadas: lamps
+      });
+     });
+    })
+
+
+
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/agua`)
+      
+      firebaseGET.on('value', (snap) => {
+
+      var water = [];
+      snap.forEach((child) => {
+        
+          water.push({
+            location: child.val().location,
+            porcetagem: child.val().porcetagem,
+            id: child.val().id
+          });
+
+      });
+      
+      e.setState({
+          agua: water
+      });
+     });
+
+    })
+
+
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/presenca`)
+      
+      firebaseGET.on('value', (snap) => {
+
+      var pres = [];
+      snap.forEach((child) => {
+        
+          pres.push({
+            location: child.val().location,
+            movimento: child.val().movimento,
+            id: child.val().id
+          });
+
+      });
+      
+      e.setState({
+          presenca: pres
+      });
+     });
+
+    })
+
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/temperatura`)
+      
+      firebaseGET.on('value', (snap) => {
+
+      var temp = [];
+      snap.forEach((child) => {
+        
+          temp.push({
+            location: child.val().location,
+            temperatura: child.val().temperatura,
+            id: child.val().id
+          });
+
+      });
+      
+      e.setState({
+        temperatura: temp
+      });
+     });
+
+    })
+
+
+
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/umidade`)
+      
+      firebaseGET.on('value', (snap) => {
+
+      var umid = [];
+      snap.forEach((child) => {
+        
+          umid.push({
+            location: child.val().location,
+            status: child.val().status,
+            id: child.val().id
+          });
+
+      });
+      
+      e.setState({
+          umidade: umid
+      });
+     });
+
+    })
+
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/nivelagua`)
+      
+      firebaseGET.on('value', (snap) => {
+
+      var agua = [];
+      snap.forEach((child) => {
+        
+          agua.push({
+            location: child.val().location,
+            status: child.val().status,
+            id: child.val().id
+          });
+
+      });
+      
+      e.setState({
+          nivelagua: agua
+      });
+     });
+
+    })
+
+
+
+
+     //locais
+     await firebase.auth().onAuthStateChanged(function(user) {
+      
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/locais`)
+      
+      firebaseGET.on('value', (snap) => {
+
+      var lugar = [];
+      snap.forEach((child) => {
+        
+          lugar.push({
+            location: child.val().location,
+          });
+
+      });
+      
+      e.setState({
+        lugares: lugar
+      });
+     });
+
+    })
+  }
+
+
+
+
+
+
+  ligarLampada(e) {
+    const lampadas = this.state.lampadas;
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'ON'})
+    })
+
+  }
+
+
+  desligarLampada(e) {
+    const lampadas = this.state.lampadas;
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'OFF'})
+    })
+
+  }
+
+
+  onValueChangePlace = (e, c) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/lampadas/${c}`).update({location: e})
+    })
+  }
+
+  onValueChangePlaceAgua = (e, c) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/agua/${c}`).update({location: e})
+    })
+  }
+
+  onValueChangePlaceTemp = (e, c) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/temperatura/${c}`).update({location: e})
+    })
+  }
+
+
+  onValueChangePlaceNVAgua = (e, c) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/nivelagua/${c}`).update({location: e})
+    })
+  }
+
+
+  onValueChangePlacePresenca = (e, c) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/presenca/${c}`).update({location: e})
+    })
+  }
+
+  onValueChangePlaceUmidade = (e, c) => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      firebase.database().ref(`/usuarios/${user.uid}/umidade/${c}`).update({location: e})
+    })
+  }
+
+
+
+  
   render() {
     const { navigation } = this.props;
     const imagem = navigation.state.params.image;
     const local = navigation.state.params.local;
+    const cardContainer = [styles.card, styles.shadow];
+
+    const lampadas = this.state.lampadas;
+    const agua = this.state.agua;
+    const nivelagua = this.state.nivelagua;
+    const presenca = this.state.presenca;
+    const temperatura = this.state.temperatura;
+    const umidade = this.state.umidade;
+    const lugares = this.state.lugares;
+
 
     return (
       <Block flex style={styles.profile}>
@@ -61,159 +352,371 @@ class Local extends React.Component {
                       Abaixo estão os Sensores e Atuadores do(a) {local}
                     </Text>
                   </Block>
+
+
+
                   <Block
                     row
                     style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
                     <Text bold size={16} color="#525F7F">
-                      Album
+                      Lâmpadas
                     </Text>
                   </Block>
+                  <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
+                  
+                  
+                  <FlatList
+                    data={lampadas}
+                    renderItem={({item}) =>
+                      <View>
+
+                          <Block flex row>
+                              <Block card flex style={cardContainer}>
+                                <TouchableWithoutFeedback>
+                                  <Block flex style={{width: 100}}>
+                                  {item.status === 'ON' ? 
+                                      <Image source={require('./lamp.png')} style={{width:100, height:150}} />
+                                      : 
+                                      <Image source={require('./lampOFF.png')} style={{width:100, height:150}} />
+                                  }
+                                  </Block>
+                                </TouchableWithoutFeedback>
+                                <TouchableWithoutFeedback>
+                                  <Block flex space="between" style={styles.cardDescription}>
+
+                                    <Text size={14} style={{flex: 1, flexWrap: 'wrap', paddingBottom: 6, fontWeight:'bold', color: '#a9c9d7'}}>{item.id}</Text>
+
+                                    <View>
+                                        <Picker
+                                            selectedValue={this.state.selecionado}
+                                            style={{height: 50, width: 200}}
+                                            onValueChange={value => this.onValueChangePlace(value, item.id)}>
+
+                                          {lugares.map(l => (
+                                            <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                          ))}
+                                        </Picker>
+                                    </View>
+
+                                      <Text size={14} style={styles.cardTitle}>{item.location}</Text>
+                                    
+                                  <View style={{flexDirection:'row'}}>
+                                  
+                                    <TouchableOpacity onPress={() => this.ligarLampada(item.id)} style={{backgroundColor: '#a9c9d7', padding:5, borderRadius:5}}>
+                                          <Text style={{fontWeight:'bold', color: 'white', left:0}}>Ligar</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity onPress={() => this.desligarLampada(item.id)} style={{backgroundColor: '#ff6124', padding:5, marginLeft:40, borderRadius:5}}>
+                                          <Text style={{fontWeight:'bold', color: 'white'}}>Desligar</Text>
+                                    </TouchableOpacity>
+                                    
+                                  </View>
+                                  </Block>
+                                </TouchableWithoutFeedback>
+                              </Block>
+                          </Block>
+
+                      </View>
+                  } />
+
+
+
+
                   <Block
                     row
-                    style={{ paddingBottom: 20, justifyContent: "flex-end" }}
+                    style={{ paddingVertical: 14, alignItems: "baseline" }}
                   >
-                    <Button
-                      small
-                      color="transparent"
-                      textStyle={{ color: "#5E72E4", fontSize: 12 }}
-                    >
-                      View all
-                    </Button>
+                    <Text bold size={16} color="#525F7F">
+                      Sensores de Água
+                    </Text>
                   </Block>
-                  <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                    <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      {Images.Viewed.map((img, imgIndex) => (
-                        <Image
-                          source={{ uri: img }}
-                          key={`viewed-${img}`}
-                          resizeMode="cover"
-                          style={styles.thumb}
-                        />
-                      ))}
+
+
+
+                  <FlatList
+                    data={agua}
+                    renderItem={({item}) =>
+                  <View>
+
+                    <Block flex row>
+                        <Block card flex style={cardContainer}>
+                          <TouchableWithoutFeedback>
+
+                            <Block flex style={{width: 100}}>
+                                <Image source={require('./drop.png')} style={{width:150, height:150}} />
+                            </Block>
+
+                          </TouchableWithoutFeedback>
+                          <TouchableWithoutFeedback>
+                            <Block flex space="between" style={styles.cardDescription}>
+
+                              <Text size={14} style={{flex: 1, flexWrap: 'wrap', paddingBottom: 6, fontWeight:'bold', color: '#a9c9d7'}}>{item.id}</Text>
+
+                              <View>
+                                  <Picker
+                                      selectedValue={this.state.selecionado}
+                                      style={{height: 50, width: 200}}
+                                      onValueChange={value => this.onValueChangePlaceAgua(value, item.id)}>
+
+                                    {lugares.map(l => (
+                                      <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                    ))}
+                                  </Picker>
+                              </View>
+
+                                <Text size={14} style={styles.cardTitle}><Text style={{fontWeight:'bold'}}>Local atual:</Text> {item.location}</Text>
+                                <Text style={{fontWeight:'bold', color: 'black', left:0}}>Porcetagem de água: {item.porcetagem}%</Text>
+
+
+                            </Block>
+                          </TouchableWithoutFeedback>
+                        </Block>
                     </Block>
+
+                  </View>
+                } />
+
+
+
+
+
+                  <Block
+                    row
+                    style={{ paddingVertical: 14, alignItems: "baseline" }}
+                  >
+                    <Text bold size={16} color="#525F7F">
+                      Sensores de Presença
+                    </Text>
                   </Block>
+
+
+
+                  <FlatList
+                    data={presenca}
+                    renderItem={({item}) =>
+                <View>
+
+                    <Block flex row>
+                        <Block card flex style={cardContainer}>
+                          <TouchableWithoutFeedback>
+
+                            <Block flex style={{width: 100}}>
+                                <Image source={require('./presenca.png')} style={{width:150, height:150}} />
+                            </Block>
+
+                          </TouchableWithoutFeedback>
+                          <TouchableWithoutFeedback>
+                            <Block flex space="between" style={styles.cardDescription}>
+
+                              <Text size={14} style={{flex: 1, flexWrap: 'wrap', paddingBottom: 6, fontWeight:'bold', color: '#a9c9d7'}}>{item.id}</Text>
+
+                              <View>
+                                  <Picker
+                                      selectedValue={this.state.selecionado}
+                                      style={{height: 50, width: 200}}
+                                      onValueChange={value => this.onValueChangePlacePresenca(value, item.id)}>
+
+                                    {lugares.map(l => (
+                                      <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                    ))}
+                                  </Picker>
+                              </View>
+
+                                <Text size={14} style={styles.cardTitle}><Text style={{fontWeight:'bold'}}>Local atual:</Text> {item.location}</Text>
+                                <Text style={{fontWeight:'bold', color: 'black', left:0}}>Status: {item.movimento}</Text>
+
+
+                            </Block>
+                          </TouchableWithoutFeedback>
+                        </Block>
+                    </Block>
+
+                </View>
+                } />
+
+
+
+
+
+
+
+
+                  <Block
+                    row
+                    style={{ paddingVertical: 14, alignItems: "baseline" }}
+                  >
+                    <Text bold size={16} color="#525F7F">
+                      Sensores de Temperatura
+                    </Text>
+                  </Block>
+
+
+                  <FlatList
+                    data={temperatura}
+                    renderItem={({item}) =>
+                <View>
+
+                    <Block flex row>
+                        <Block card flex style={cardContainer}>
+                          <TouchableWithoutFeedback>
+
+                            <Block flex style={{width: 100}}>
+                                <Image source={require('./cold.png')} style={{width:100, height:150}} />
+                            </Block>
+
+                          </TouchableWithoutFeedback>
+                          <TouchableWithoutFeedback>
+                            <Block flex space="between" style={styles.cardDescription}>
+
+                              <Text size={14} style={{flex: 1, flexWrap: 'wrap', paddingBottom: 6, fontWeight:'bold', color: '#a9c9d7'}}>{item.id}</Text>
+
+                              <View>
+                                  <Picker
+                                      selectedValue={this.state.selecionado}
+                                      style={{height: 50, width: 200}}
+                                      onValueChange={value => this.onValueChangePlaceTemp(value, item.id)}>
+
+                                    {lugares.map(l => (
+                                      <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                    ))}
+                                  </Picker>
+                              </View>
+
+                                <Text size={14} style={styles.cardTitle}><Text style={{fontWeight:'bold'}}>Local atual:</Text> {item.location}</Text>
+                                <Text style={{fontWeight:'bold', color: 'black', left:0}}>Temperatura: {item.temperatura}</Text>
+
+
+                            </Block>
+                          </TouchableWithoutFeedback>
+                        </Block>
+                    </Block>
+
+                </View>
+                } />
+
+
+
+
+                  <Block
+                    row
+                    style={{ paddingVertical: 14, alignItems: "baseline" }}
+                  >
+                    <Text bold size={16} color="#525F7F">
+                      Sensores de Umidade
+                    </Text>
+                  </Block>
+
+
+
+
+
+                  <FlatList
+                    data={umidade}
+                    renderItem={({item}) =>
+                <View>
+
+                    <Block flex row>
+                        <Block card flex style={cardContainer}>
+                          <TouchableWithoutFeedback>
+
+                            <Block flex style={{width: 100}}>
+                                <Image source={require('./umidade.png')} style={{width:150, height:150}} />
+                            </Block>
+
+                          </TouchableWithoutFeedback>
+                          <TouchableWithoutFeedback>
+                            <Block flex space="between" style={styles.cardDescription}>
+
+                              <Text size={14} style={{flex: 1, flexWrap: 'wrap', paddingBottom: 6, fontWeight:'bold', color: '#a9c9d7'}}>{item.id}</Text>
+
+                              <View>
+                                  <Picker
+                                      selectedValue={this.state.selecionado}
+                                      style={{height: 50, width: 200}}
+                                      onValueChange={value => this.onValueChangePlaceUmidade(value, item.id)}>
+
+                                    {lugares.map(l => (
+                                      <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                    ))}
+                                  </Picker>
+                              </View>
+
+                                <Text size={14} style={styles.cardTitle}><Text style={{fontWeight:'bold'}}>Local atual:</Text> {item.location}</Text>
+                                <Text style={{fontWeight:'bold', color: 'black', left:0}}>Status: {item.status}</Text>
+
+
+                            </Block>
+                          </TouchableWithoutFeedback>
+                        </Block>
+                    </Block>
+
+                </View>
+                } />
+
+
+
+                  <Block
+                    row
+                    style={{ paddingVertical: 14, alignItems: "baseline" }}
+                  >
+                    <Text bold size={16} color="#525F7F">
+                      Sensores de Nível de Água
+                    </Text>
+                  </Block>
+
+
+
+                  <FlatList
+                    data={nivelagua}
+                    renderItem={({item}) =>
+                <View>
+
+                    <Block flex row>
+                        <Block card flex style={cardContainer}>
+                          <TouchableWithoutFeedback>
+
+                            <Block flex style={{width: 100}}>
+                                <Image source={require('./flood.png')} style={{width:150, height:150}} />
+                            </Block>
+
+                          </TouchableWithoutFeedback>
+                          <TouchableWithoutFeedback>
+                            <Block flex space="between" style={styles.cardDescription}>
+
+                              <Text size={14} style={{flex: 1, flexWrap: 'wrap', paddingBottom: 6, fontWeight:'bold', color: '#a9c9d7'}}>{item.id}</Text>
+
+                              <View>
+                                  <Picker
+                                      selectedValue={this.state.selecionado}
+                                      style={{height: 50, width: 200}}
+                                      onValueChange={value => this.onValueChangePlaceNVAgua(value, item.id)}>
+
+                                    {lugares.map(l => (
+                                      <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                    ))}
+                                  </Picker>
+                              </View>
+
+                                <Text size={14} style={styles.cardTitle}><Text style={{fontWeight:'bold'}}>Local atual:</Text> {item.location}</Text>
+                                <Text style={{fontWeight:'bold', color: 'black', left:0}}>Status: {item.status}</Text>
+
+
+                            </Block>
+                          </TouchableWithoutFeedback>
+                        </Block>
+                    </Block>
+
+                </View>
+                } />
+
+
+                </Block>
                 </Block>
               </Block>
             </ScrollView>
           </ImageBackground>
         </Block>
-        {/* <ScrollView showsVerticalScrollIndicator={false} 
-                    contentContainerStyle={{ flex: 1, width, height, zIndex: 9000, backgroundColor: 'red' }}>
-        <Block flex style={styles.profileCard}>
-          <Block middle style={styles.avatarContainer}>
-            <Image
-              source={{ uri: Images.ProfilePicture }}
-              style={styles.avatar}
-            />
-          </Block>
-          <Block style={styles.info}>
-            <Block
-              middle
-              row
-              space="evenly"
-              style={{ marginTop: 20, paddingBottom: 24 }}
-            >
-              <Button small style={{ backgroundColor: argonTheme.COLORS.INFO }}>
-                CONNECT
-              </Button>
-              <Button
-                small
-                style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-              >
-                MESSAGE
-              </Button>
-            </Block>
-
-            <Block row space="between">
-              <Block middle>
-                <Text
-                  bold
-                  size={12}
-                  color="#525F7F"
-                  style={{ marginBottom: 4 }}
-                >
-                  2K
-                </Text>
-                <Text size={12}>Orders</Text>
-              </Block>
-              <Block middle>
-                <Text bold size={12} style={{ marginBottom: 4 }}>
-                  10
-                </Text>
-                <Text size={12}>Photos</Text>
-              </Block>
-              <Block middle>
-                <Text bold size={12} style={{ marginBottom: 4 }}>
-                  89
-                </Text>
-                <Text size={12}>Comments</Text>
-              </Block>
-            </Block>
-          </Block>
-          <Block flex>
-              <Block middle style={styles.nameInfo}>
-                <Text bold size={28} color="#32325D">
-                  Jessica Jones, 27
-                </Text>
-                <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                  San Francisco, USA
-                </Text>
-              </Block>
-              <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
-                <Block style={styles.divider} />
-              </Block>
-              <Block middle>
-                <Text size={16} color="#525F7F" style={{ textAlign: "center" }}>
-                  An artist of considerable range, Jessica name taken by
-                  Melbourne …
-                </Text>
-                <Button
-                  color="transparent"
-                  textStyle={{
-                    color: "#233DD2",
-                    fontWeight: "500",
-                    fontSize: 16
-                  }}
-                >
-                  Show more
-                </Button>
-              </Block>
-              <Block
-                row
-                style={{ paddingVertical: 14, alignItems: "baseline" }}
-              >
-                <Text bold size={16} color="#525F7F">
-                  Album
-                </Text>
-              </Block>
-              <Block
-                row
-                style={{ paddingBottom: 20, justifyContent: "flex-end" }}
-              >
-                <Button
-                  small
-                  color="transparent"
-                  textStyle={{ color: "#5E72E4", fontSize: 12 }}
-                >
-                  View all
-                </Button>
-              </Block>
-              <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                <Block row space="between" style={{ flexWrap: "wrap" }}>
-                  {Images.Viewed.map((img, imgIndex) => (
-                    <Image
-                      source={{ uri: img }}
-                      key={`viewed-${img}`}
-                      resizeMode="cover"
-                      style={styles.thumb}
-                    />
-                  ))}
-                </Block>
-              </Block>
-          </Block>
-        </Block>
-                  </ScrollView>*/}
       </Block>
     );
   }
@@ -276,6 +779,52 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     width: thumbMeasure,
     height: thumbMeasure
+  },
+  card: {
+    flexDirection:'row',
+    backgroundColor: theme.COLORS.WHITE,
+    marginVertical: theme.SIZES.BASE,
+    borderWidth: 0,
+    minHeight: 114,
+    marginBottom: 16
+  },
+  cardTitle: {
+    flex: 1,
+    flexWrap: 'wrap',
+    paddingBottom: 6
+  },
+  cardDescription: {
+    padding: theme.SIZES.BASE / 2
+  },
+  imageContainer: {
+    borderRadius: 3,
+    elevation: 1,
+    overflow: 'hidden',
+  },
+  image: {
+    // borderRadius: 3,
+  },
+  horizontalImage: {
+    height: 122,
+    width: 'auto',
+  },
+  horizontalStyles: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+  verticalStyles: {
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 0
+  },
+  fullImage: {
+    height: 215
+  },
+  shadow: {
+    shadowColor: theme.COLORS.BLACK,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    shadowOpacity: 0.1,
+    elevation: 2,
   }
 });
 
