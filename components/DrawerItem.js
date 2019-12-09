@@ -50,7 +50,7 @@ class DrawerItem extends React.Component {
       case "Relatórios":
         return (
           <Ionicons
-              size={26}
+              size={12}
               name="ios-browsers"
               style={{color:'#fabe2b'}}
           />

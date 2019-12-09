@@ -72,11 +72,8 @@ class Onboarding extends React.Component {
           <Block flex middle>
             <Block style={styles.registerContainer}>
               <Block flex={0.25} middle style={styles.socialConnect}>
-                <Text color="#8898AA" size={12}>
-                  Bem-vindo(a)
-                </Text>
                 <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                  <Image style={{width: 200, height:50, borderRadius:70}} source={require('./foto.png')}/>                 
+                  <Image style={{width: 80, height:"auto", borderRadius:70}} source={require('./foto.png')}/>                 
                   <Text style={styles.socialTextButtons}>PioT</Text>
                 </Block>
               </Block>

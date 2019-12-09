@@ -1,15 +1,18 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, StyleSheet, Platform, Dimensions } from 'react-native';
+import { TouchableOpacity, StyleSheet, Platform, FlatList, Dimensions, View, Modal, ImageBackground } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 import firebase from '../screens/firebase/firebase'; 
 import Icon from './Icon';
 import Input from './Input';
+
+import { Images } from "../constants";
 import { Ionicons } from '@expo/vector-icons';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
 
 const { height, width } = Dimensions.get('window');
+
 
 const iPhoneX = () => Platform.OS === 'ios' && (height === 812 || width === 812 || height === 896 || width === 896);
 
@@ -48,6 +51,50 @@ const SearchButton = ({isWhite, style, navigation}) => (
 );
 
 class Header extends React.Component {
+
+  constructor() {
+    super(); 
+    this.state = {
+      isVisible: false,
+      notifications:[]
+    }
+  }
+
+
+  async componentDidMount() {
+    const notifications = this.state.notifications;
+    let e = this;
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+
+      if(user) {
+          let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/notificacoes`)
+          
+          firebaseGET.on('value', (snap) => {
+
+          var notif = [];
+          snap.forEach((child) => {
+            
+              notif.push({
+                id: child.val().id,
+                message: child.val().message
+              });
+
+          });
+          
+          e.setState({
+            notifications: notif
+          });
+        });
+      }
+    })
+  }
+
+
+
+
+
+
   handleLeftPress = () => {
     const { back, navigation } = this.props;
     return (back ? navigation.goBack() : navigation.openDrawer());
@@ -55,11 +102,12 @@ class Header extends React.Component {
 
   logout() {
     let e = this;
+    firebase.auth().signOut()
+    e.props.navigation.navigate('Login')
 
-
+    /*
     firebase.auth().onAuthStateChanged(function(user) {
 
-        console.log('ID do headereee: ' + user)
         if(user == null || user == undefined) {
           console.log('id nulo no header')
         } 
@@ -68,12 +116,54 @@ class Header extends React.Component {
           e.props.navigation.navigate('Login')
         }
       })
-
+    */
   }
+
+
+  openNotifications() {
+    const isVisible = this.state.isVisible;
+
+    this.setState({isVisible: true})
+  }
+
+
+
+
+  deleteNotification() {
+    firebase.auth().onAuthStateChanged(function(user) {
+
+      if(user) {
+        let firebaseGET = firebase.database().ref(`/usuarios/${user.uid}/notificacoes`)
+    
+        firebaseGET.on('value', (snap) => {
+          var notificacoes = [];
+  
+          snap.forEach((child) => {
+            notificacoes.push({
+              id: child.val().id,
+              message: child.val().message
+            })
+  
+          })
+  
+          console.log(notificacoes)
+          e.setState({c: notificacoes})
+  
+        })
+        
+      }
+    })
+    
+  }
+
+
 
   renderRight = () => {
     const { white, title, navigation } = this.props;
     const { routeName } = navigation.state;
+    const isVisible = this.state.isVisible;
+    const notifications = this.state.notifications;
+
 
     if (title === 'Title') {
       return [
@@ -85,6 +175,86 @@ class Header extends React.Component {
     switch (routeName) {
       case 'Home':
         return (
+          <View style={{flexDirection:'row'}}>
+            
+            {/*Modal*/}
+            <Modal
+                style={{backgroundColor: 'white'}}
+                presentationStyle="overFullScreen"
+                transparent={false}
+                animationType="fade"
+                visible={this.state.isVisible}
+                onRequestClose={() => {
+                  alert('Saindo do modal.');
+                }}
+            >
+              <View style={{flexDirection:'column'}}>
+                <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
+                  
+                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>Sensores e Atuadores</Text>
+
+                    <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
+                      <Ionicons 
+                        name='md-exit'
+                        size={34}
+                        style={{color: 'blue', marginLeft: 50}}
+                      />
+                    </TouchableOpacity>
+
+
+                </View>
+
+
+                  <View style={{marginTop:20}}>
+                    <FlatList 
+                      data={notifications}
+                      keyExtractor={item => item.id}
+                      renderItem={({item}) => 
+
+                      <View style={{width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
+                        <Text style={{color:'#878787'}}>{item.id}</Text>
+                        
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
+
+                                <TouchableOpacity onPress={() => this.deleteNotification()}>
+                                    <Ionicons name='md-checkbox' size={17}/>
+                                </TouchableOpacity>
+                        
+                        </View>
+                      
+                      </View>
+                    
+
+                    } />
+                    
+                    
+                  </View>
+              </View>
+            </Modal>
+
+              <TouchableOpacity style={{padding: 12, position: 'relative'}} onPress={() => this.logout()}>
+                <Ionicons
+                  size={26}
+                  name="ios-exit"
+                  style={{color:'blue'}}
+                />
+                <Block />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => this.openNotifications()} style={{padding: 12, position: 'relative'}}>
+                <Ionicons
+                  size={26}
+                  name="md-notifications"
+                  style={{color:'black'}}
+                />
+                <Block />
+              </TouchableOpacity>
+          </View>
+        );
+
+      case 'Deals':
+        return (
           <TouchableOpacity style={styles.button} onPress={() => this.logout()}>
             <Ionicons
               size={26}
@@ -94,12 +264,6 @@ class Header extends React.Component {
             <Block />
           </TouchableOpacity>
         );
-
-      case 'Deals':
-        return ([
-          <BellButton key='chat-categories' navigation={navigation} />,
-          <BasketButton key='basket-categories' navigation={navigation} />
-        ]);
       case 'Categories':
         return ([
           <BellButton key='chat-categories' navigation={navigation} isWhite={white} />,

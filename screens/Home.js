@@ -112,18 +112,18 @@ class Home extends React.Component {
                 } />
 
                   <View>
-                    <Text style={{fontWeight: 'bold', fontSize:20, marginTop:70, color: '#5E72E4'}}>Sensores E Atuadores</Text>
+                    <Text style={{fontWeight: 'bold', fontSize:20, marginTop:70, color: '#5E72E4'}}>Sensores e Atuadores</Text>
                   </View>
 
                   {/*lâmpadas*/}
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Lampadas')}>
-                      <Block flex style={{width: 100}}>
-                        <Image source={require('./lamp.png')} style={imageStyles} />
+                      <Block flex style={{width: 100, padding: 20}}>
+                        <Image source={require('./lamp.png')} style={{width:55, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Lampadas')}>
-                      <Block flex space="between" style={styles.cardDescription}>
+                      <Block flex style={styles.cardDescription}>
                         <Text size={14} style={styles.cardTitle}>Lâmpadas</Text>
                         <Text size={12} style={{fontSize:12, fontWeight:'bold', color: 'blue'}}>Acessar Lista de Lâmpadas</Text>
                       </Block>
@@ -133,8 +133,8 @@ class Home extends React.Component {
                   {/*presença*/}
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Presenca')}>
-                      <Block flex style={{width: 100}}>
-                        <Image source={require('./presenca.png')} style={imageStyles} />
+                      <Block flex style={{width: 100, padding: 20}}>
+                        <Image source={require('./presenca.png')} style={{width:80, height:80}}/>
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Presenca')}>
@@ -149,8 +149,8 @@ class Home extends React.Component {
                   {/*temperatura*/}
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
-                      <Block flex style={{width: 100}}>
-                        <Image source={require('./cold.png')} style={imageStyles} />
+                      <Block flex style={{width: 100, padding:20}}>
+                        <Image source={require('./cold.png')} style={{width:60, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
@@ -166,8 +166,8 @@ class Home extends React.Component {
                   {/*sensor de água*/}
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Agua')}>
-                      <Block flex style={{width: 100}}>
-                        <Image source={require('./drop.png')} style={imageStyles} />
+                      <Block flex style={{width: 100, padding:20}}>
+                        <Image source={require('./drop.png')} style={{width:65, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Agua')}>
@@ -182,8 +182,8 @@ class Home extends React.Component {
                    {/*sensor de umidade*/}
                    <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Umidade')}>
-                      <Block flex style={{width: 100}}>
-                        <Image source={require('./umidade.png')} style={imageStyles} />
+                      <Block flex style={{width: 100, padding:20}}>
+                        <Image source={require('./umidade.png')} style={{width:78, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Umidade')}>
@@ -198,8 +198,8 @@ class Home extends React.Component {
                    {/*sensor de nível de água*/}
                    <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('NivelAgua')}>
-                      <Block flex style={{width: 100}}>
-                        <Image source={require('./flood.png')} style={imageStyles} />
+                      <Block flex style={{width: 100, padding:20}}>
+                        <Image source={require('./flood.png')} style={{width:65, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('NivelAgua')}>
@@ -250,10 +250,10 @@ const styles = StyleSheet.create({
   cardTitle: {
     flex: 1,
     flexWrap: 'wrap',
-    paddingBottom: 6
+    paddingBottom: 2
   },
   cardDescription: {
-    padding: theme.SIZES.BASE / 2
+    padding: theme.SIZES.BASE
   },
   imageContainer: {
     borderRadius: 3,

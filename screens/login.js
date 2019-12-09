@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions, 
+  TouchableOpacity,
   KeyboardAvoidingView
 } from "react-native";
 import { Block, Button, Text, theme, Checkbox  } from "galio-framework";
@@ -32,19 +33,14 @@ class Login extends React.Component {
         
 
             try {
-                if( this.state.senha == this.state.confirmarSenha ){ 
                   firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha);
                 
 
                   this.props.navigation.navigate('Home')
-                    alert('Logado!')
-                } else {
-                    alert('As senhas não coincidem')
-                }
 
 
             } catch (error) {
-                console.log(error)
+                alert("Erro no Login")
             }
       
   }
@@ -60,18 +56,17 @@ class Login extends React.Component {
           <Block flex middle>
             <Block style={styles.registerContainer}>
               <Block flex={0.25} middle style={styles.socialConnect}>
-                <Text color="#8898AA" size={12}>
-                  Bem-vindo(a)
-                </Text>
                 <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                  <Image style={{width: 200, height:50, borderRadius:70}} source={require('./foto.png')}/>                 
+                  <Image style={{width: 80, height:"auto", borderRadius:70}} source={require('./foto.png')}/>                 
                   <Text style={styles.socialTextButtons}>PioT</Text>
                 </Block>
+
               </Block>
+              
               <Block flex>
                 <Block flex={0.17} middle>
                   <Text color="#8898AA" size={12}>
-                    Faça seu login e aproveite a plataforma!
+                    Faça seu login abaixo!
                   </Text>
                 </Block>
                 <Block flex center>
@@ -117,25 +112,14 @@ class Login extends React.Component {
                       />
                     </Block>
 
-                    <Block width={width * 0.8}>
-                      <Input
-                        password
-                        borderless
-                        onChangeText = {(confirmarSenha) => this.setState({confirmarSenha})}
-                        value={this.state.confirmarSenha}
-                        placeholder="Confirmar Senha"
-                        iconContent={
-                          <Icon
-                            size={16}
-                            color={argonTheme.COLORS.ICON}
-                            name="padlock-unlocked"
-                            family="ArgonExtra"
-                            style={styles.inputIcons}
-                          />
-                        }
-                      />
-                    </Block>
-                    
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Onboarding')}>
+                        <Text style={{
+                          color: argonTheme.COLORS.PRIMARY,
+                          fontWeight: "800",
+                          fontSize: 15
+                          }}>Não tem uma conta? Cadastre-se agora!</Text>
+                    </TouchableOpacity>
+
                     <Block middle>
                       <Button onPress={() => this.login()} color="primary" style={styles.createButton}>
                         <Text bold size={14} color={argonTheme.COLORS.WHITE}>
