@@ -105,18 +105,7 @@ class Header extends React.Component {
     firebase.auth().signOut()
     e.props.navigation.navigate('Login')
 
-    /*
-    firebase.auth().onAuthStateChanged(function(user) {
-
-        if(user == null || user == undefined) {
-          console.log('id nulo no header')
-        } 
-        if (user !== null || user !== undefined) {
-          firebase.auth().signOut()
-          e.props.navigation.navigate('Login')
-        }
-      })
-    */
+    
   }
 
 
@@ -129,33 +118,15 @@ class Header extends React.Component {
 
 
 
-  deleteNotification() {
+deleteNotification(e) {
     firebase.auth().onAuthStateChanged(function(user) {
 
       if(user) {
-        let firebaseGET = firebase.database().ref(`/usuarios/${user.uid}/notificacoes`)
-    
-        firebaseGET.on('value', (snap) => {
-          var notificacoes = [];
-  
-          snap.forEach((child) => {
-            notificacoes.push({
-              id: child.val().id,
-              message: child.val().message
-            })
-  
-          })
-  
-          console.log(notificacoes)
-          e.setState({c: notificacoes})
-  
-        })
-        
+        firebase.database().ref(`/usuarios/${user.uid}/notificacoes/${e}`).remove()
       }
-    })
     
-  }
-
+  })
+}
 
 
   renderRight = () => {
@@ -214,11 +185,11 @@ class Header extends React.Component {
                       <View style={{width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
                         <Text style={{color:'#878787'}}>{item.id}</Text>
                         
-                        <View style={{flexDirection:'row'}}>
+                        <View style={{marginTop:10, flexDirection:'row'}}>
                             <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
 
-                                <TouchableOpacity onPress={() => this.deleteNotification()}>
-                                    <Ionicons name='md-checkbox' size={17}/>
+                                <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
+                                    <Ionicons style={{color: 'green', marginLeft: 100}} name='md-checkbox' size={27}/>
                                 </TouchableOpacity>
                         
                         </View>

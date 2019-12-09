@@ -30,14 +30,15 @@ class Login extends React.Component {
   }
 
   login() {
-        
+    firebase.auth().onAuthStateChanged(function(user) {
+        if(user) {
+          return null
+        }
 
-            try {
-                  firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha);
-                
-
-                  this.props.navigation.navigate('Home')
-
+      })
+          try {
+            firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.senha);
+              this.props.navigation.navigate('Home')
 
             } catch (error) {
                 alert("Erro no Login")
