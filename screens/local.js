@@ -34,12 +34,20 @@ class Local extends React.Component {
         presenca:[],
         temperatura:[],
         umidade:[],
-        lugares:[]
+        lugares:[],
+        selecionado:'',
+        selecionado2:'',
+        selecionado3:'',
+        selecionado4:'',
+        selecionado5:'',
+        selecionado6:'',
     }
   }
 
 
   async componentDidMount() {
+    const location = this.props.navigation.state.params.local
+
     var lampadas = this.state.lampadas;
     var agua = this.state.agua;
     var nivelagua = this.state.nivelagua;
@@ -58,13 +66,15 @@ class Local extends React.Component {
 
       var lamps = [];
       snap.forEach((child) => {
-        
+        if(location == child.val().location) {
+         
           lamps.push({
             location: child.val().location,
             status: child.val().status,
             id: child.val().id
           });
 
+        }
       });
       
       e.setState({
@@ -85,13 +95,15 @@ class Local extends React.Component {
 
       var water = [];
       snap.forEach((child) => {
-        
+        if(location == child.val().location) {
+         
           water.push({
             location: child.val().location,
             porcetagem: child.val().porcetagem,
             id: child.val().id
           });
-
+        
+        }
       });
       
       e.setState({
@@ -112,13 +124,15 @@ class Local extends React.Component {
 
       var pres = [];
       snap.forEach((child) => {
-        
+        if(location == child.val().location) {
+
           pres.push({
             location: child.val().location,
             movimento: child.val().movimento,
             id: child.val().id
           });
-
+        
+        }
       });
       
       e.setState({
@@ -138,12 +152,14 @@ class Local extends React.Component {
 
       var temp = [];
       snap.forEach((child) => {
-        
+        if(location == child.val().location) {
+         
           temp.push({
             location: child.val().location,
             temperatura: child.val().temperatura,
             id: child.val().id
           });
+        }
 
       });
       
@@ -166,12 +182,14 @@ class Local extends React.Component {
 
       var umid = [];
       snap.forEach((child) => {
+        if(location == child.val().location) {
         
           umid.push({
             location: child.val().location,
             status: child.val().status,
             id: child.val().id
           });
+        }
 
       });
       
@@ -192,12 +210,14 @@ class Local extends React.Component {
 
       var agua = [];
       snap.forEach((child) => {
+        if(location == child.val().location) {
         
           agua.push({
             location: child.val().location,
             status: child.val().status,
             id: child.val().id
           });
+        }
 
       });
       
@@ -455,7 +475,7 @@ class Local extends React.Component {
 
                               <View>
                                   <Picker
-                                      selectedValue={this.state.selecionado}
+                                      selectedValue={this.state.selecionado2}
                                       style={{height: 50, width: 200}}
                                       onValueChange={value => this.onValueChangePlaceAgua(value, item.id)}>
 
@@ -513,7 +533,7 @@ class Local extends React.Component {
 
                               <View>
                                   <Picker
-                                      selectedValue={this.state.selecionado}
+                                      selectedValue={this.state.selecionado3}
                                       style={{height: 50, width: 200}}
                                       onValueChange={value => this.onValueChangePlacePresenca(value, item.id)}>
 
@@ -573,7 +593,7 @@ class Local extends React.Component {
 
                               <View>
                                   <Picker
-                                      selectedValue={this.state.selecionado}
+                                      selectedValue={this.state.selecionado4}
                                       style={{height: 50, width: 200}}
                                       onValueChange={value => this.onValueChangePlaceTemp(value, item.id)}>
 
@@ -632,7 +652,7 @@ class Local extends React.Component {
 
                               <View>
                                   <Picker
-                                      selectedValue={this.state.selecionado}
+                                      selectedValue={this.state.selecionado5}
                                       style={{height: 50, width: 200}}
                                       onValueChange={value => this.onValueChangePlaceUmidade(value, item.id)}>
 
@@ -688,7 +708,7 @@ class Local extends React.Component {
 
                               <View>
                                   <Picker
-                                      selectedValue={this.state.selecionado}
+                                      selectedValue={this.state.selecionado6}
                                       style={{height: 50, width: 200}}
                                       onValueChange={value => this.onValueChangePlaceNVAgua(value, item.id)}>
 
