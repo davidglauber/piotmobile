@@ -1,6 +1,6 @@
 import React from 'react';
 import { withNavigation } from 'react-navigation';
-import { TouchableOpacity, StyleSheet, Platform, FlatList, Dimensions, View, Modal, ImageBackground } from 'react-native';
+import { TouchableOpacity, StyleSheet, Platform, FlatList, Dimensions, View, Modal, Image } from 'react-native';
 import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 import firebase from '../screens/firebase/firebase'; 
 import Icon from './Icon';
@@ -160,7 +160,7 @@ deleteNotification(e) {
                 }}
             >
               <View style={{flexDirection:'column'}}>
-                <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
+                <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>
                   
                     <Text style={{fontSize: 20, fontWeight: 'bold'}}>Sensores e Atuadores</Text>
 
@@ -177,28 +177,35 @@ deleteNotification(e) {
 
 
                   <View style={{marginTop:20}}>
-                    <FlatList 
-                      data={notifications}
-                      keyExtractor={item => item.id}
-                      renderItem={({item}) => 
 
-                      <View style={{width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
-                        <Text style={{color:'#878787'}}>{item.id}</Text>
-                        
-                        <View style={{marginTop:10, flexDirection:'row'}}>
-                            <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
-
-                                <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
-                                    <Ionicons style={{color: 'green', marginLeft: 100}} name='md-checkbox' size={27}/>
-                                </TouchableOpacity>
-                        
-                        </View>
-                      
+                    {notifications.length == 0 ?
+                      <View style={{flex:1, justifyContent:'center', alignItems:'center', alignContent:'center'}}>
+                        <Image style={{marginTop:200, width:200, height: 200}} source={require('../screens/404.gif')}/>
+      
+      
+                        <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>Sem Notificações!</Text>
                       </View>
-                    
+                    :
 
-                    } />
-                    
+                      <FlatList 
+                        data={notifications}
+                        keyExtractor={item => item.id}
+                        renderItem={({item}) => 
+
+                            <View style={{flexDirection:'column', width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
+                              <View style={{ flexDirection:'row'}}>
+                                <Text style={{color:'#878787'}}>{item.id}</Text>
+                                <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
+                                            <Ionicons style={{color: 'green', marginLeft: 140}} name='md-checkbox' size={27}/>
+                                </TouchableOpacity>
+                              </View>
+                              <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
+                            </View>
+                          
+                      
+
+                      } />
+                    }
                     
                   </View>
               </View>
