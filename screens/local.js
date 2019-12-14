@@ -46,7 +46,8 @@ class Local extends React.Component {
 
 
   async componentDidMount() {
-    const location = this.props.navigation.state.params.local
+    const location = this.props.navigation.state.params.local;
+    console.log('location parametro: ' + location)
 
     var lampadas = this.state.lampadas;
     var agua = this.state.agua;
@@ -60,6 +61,10 @@ class Local extends React.Component {
 
 
     await firebase.auth().onAuthStateChanged(function(user) {
+      if(user) {
+        return null
+      }
+
       let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/lampadas`)
         
       firebaseGET.on('value', (snap) => {

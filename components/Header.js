@@ -150,63 +150,61 @@ deleteNotification(e) {
             
             {/*Modal*/}
             <Modal
-                style={{backgroundColor: 'white'}}
-                presentationStyle="overFullScreen"
-                transparent={false}
-                animationType="fade"
+                transparent={true}
+                animationType="slide"
                 visible={this.state.isVisible}
-                onRequestClose={() => {
-                  alert('Saindo do modal.');
-                }}
+                onRequestClose={() => this.setState({isVisible: false})}
             >
-              <View style={{flexDirection:'column'}}>
-                <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>
-                  
-                    <Text style={{fontSize: 20, fontWeight: 'bold'}}>Sensores e Atuadores</Text>
-
-                    <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
-                      <Ionicons 
-                        name='md-exit'
-                        size={34}
-                        style={{color: 'blue', marginLeft: 50}}
-                      />
-                    </TouchableOpacity>
-
-
-                </View>
-
-
-                  <View style={{marginTop:20}}>
-
-                    {notifications.length == 0 ?
-                      <View style={{flex:1, justifyContent:'center', alignItems:'center', alignContent:'center'}}>
-                        <Image style={{marginTop:200, width:200, height: 200}} source={require('../screens/404.gif')}/>
-      
-      
-                        <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>Sem Notificações!</Text>
-                      </View>
-                    :
-
-                      <FlatList 
-                        data={notifications}
-                        keyExtractor={item => item.id}
-                        renderItem={({item}) => 
-
-                            <View style={{flexDirection:'column', width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
-                              <View style={{ flexDirection:'row'}}>
-                                <Text style={{color:'#878787'}}>{item.id}</Text>
-                                <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
-                                            <Ionicons style={{color: 'green', marginLeft: 140}} name='md-checkbox' size={27}/>
-                                </TouchableOpacity>
-                              </View>
-                              <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
-                            </View>
-                          
+              <View style={{flex: 1, marginTop: height / 2, backgroundColor: 'white', borderRadius: 20}}>
+                  <View style={{flexDirection:'column'}}>
+                    <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>
                       
+                        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Sensores e Atuadores</Text>
 
-                      } />
-                    }
-                    
+                        <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
+                          <Ionicons 
+                            name='md-exit'
+                            size={34}
+                            style={{color: 'blue', marginLeft: 50}}
+                          />
+                        </TouchableOpacity>
+
+
+                    </View>
+
+
+                      <View style={{marginTop:50}}>
+
+                        {notifications.length == 0 ?
+                          <View style={{flex:1, justifyContent:'center', alignItems:'center', alignContent:'center'}}>
+                            <Image style={{marginTop:200, width:400, height: 200}} source={require('../screens/404.gif')}/>
+          
+          
+                            <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>Sem Notificações!</Text>
+                          </View>
+                        :
+
+                          <FlatList 
+                            data={notifications}
+                            keyExtractor={item => item.id}
+                            renderItem={({item}) => 
+
+                                <View style={{flexDirection:'column', width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
+                                  <View style={{ flexDirection:'row'}}>
+                                    <Text style={{color:'#878787'}}>{item.id}</Text>
+                                    <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
+                                                <Ionicons style={{color: 'green', marginLeft: 140}} name='md-checkbox' size={27}/>
+                                    </TouchableOpacity>
+                                  </View>
+                                  <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
+                                </View>
+                              
+                          
+
+                          } />
+                        }
+                        
+                      </View>
                   </View>
               </View>
             </Modal>
@@ -217,7 +215,6 @@ deleteNotification(e) {
                   name="ios-exit"
                   style={{color:'blue'}}
                 />
-                <Block />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => this.openNotifications()} style={{padding: 12, position: 'relative'}}>
@@ -226,7 +223,6 @@ deleteNotification(e) {
                   name="md-notifications"
                   style={{color:'black'}}
                 />
-                <Block />
               </TouchableOpacity>
           </View>
         );
@@ -382,6 +378,9 @@ const styles = StyleSheet.create({
   button: {
     padding: 12,
     position: 'relative',
+  },
+  modal: {
+    backgroundColor: 'black',
   },
   title: {
     width: '100%',

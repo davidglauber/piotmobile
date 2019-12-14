@@ -117,6 +117,7 @@ class Presenca extends React.Component {
                 :
                 <FlatList
                     data={presenca}
+                    keyExtractor={item => item.id}
                     renderItem={({item}) =>
                 <View>
 

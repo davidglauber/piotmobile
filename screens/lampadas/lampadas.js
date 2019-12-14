@@ -134,6 +134,7 @@ class Lampadas extends React.Component {
 
                 <FlatList
                     data={lampadasDisponiveis}
+                    keyExtractor={item => item.id}
                     renderItem={({item}) =>
                 <View>
 
@@ -165,7 +166,7 @@ class Lampadas extends React.Component {
                                   </Picker>
                               </View>
 
-                                <Text size={14} style={styles.cardTitle}>{item.location}</Text>
+                                <Text size={14} style={styles.cardTitle}>Local Atual: {item.location}</Text>
                               
                             <View style={{flexDirection:'row'}}>
                              
@@ -220,7 +221,8 @@ const styles = StyleSheet.create({
   cardTitle: {
     flex: 1,
     flexWrap: 'wrap',
-    paddingBottom: 6
+    paddingBottom: 6, 
+    fontWeight:'bold'
   },
   cardDescription: {
     padding: theme.SIZES.BASE / 2

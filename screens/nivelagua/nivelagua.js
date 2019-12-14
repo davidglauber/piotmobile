@@ -115,6 +115,7 @@ class NivelAgua extends React.Component {
                 :
                 <FlatList
                     data={nivel}
+                    keyExtractor={item => item.id}
                     renderItem={({item}) =>
                 <View>
 

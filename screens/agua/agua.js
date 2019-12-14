@@ -115,6 +115,7 @@ class Agua extends React.Component {
 
                 <FlatList
                     data={agua}
+                    keyExtractor={item => item.id}
                     renderItem={({item}) =>
                 <View>
 
@@ -139,7 +140,7 @@ class Agua extends React.Component {
                                       onValueChange={value => this.onValueChangePlace(value, item.id)}>
 
                                     {lugaresDisponiveis.map(l => (
-                                      <Picker.Item placeholder={item.location} label={l.location} key={item.id} value={l.location} />
+                                      <Picker.Item  label={l.location} key={item.id} value={l.location} />
                                     ))}
                                   </Picker>
                               </View>

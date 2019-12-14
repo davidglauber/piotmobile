@@ -115,6 +115,7 @@ class Umidade extends React.Component {
 
                 <FlatList
                     data={umidade}
+                    keyExtractor={item => item.id}
                     renderItem={({item}) =>
                 <View>
 

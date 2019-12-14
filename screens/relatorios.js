@@ -3,7 +3,14 @@ import {ScrollView, Image,  StyleSheet, Text, Picker, View, Button, KeyboardAvoi
 import { Block, theme } from 'galio-framework';
 import { Ionicons } from '@expo/vector-icons';
 import {Select} from "../components/";
-
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from 'react-native-chart-kit';
 
 import firebase from './firebase/firebase';
 

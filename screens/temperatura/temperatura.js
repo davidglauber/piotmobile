@@ -116,6 +116,7 @@ class Temperatura extends React.Component {
 
                 <FlatList
                     data={temperatura}
+                    keyExtractor={item => item.id}
                     renderItem={({item}) =>
                 <View>
 
