@@ -94,6 +94,19 @@ class Home extends React.Component {
             <TouchableOpacity onPress={() => this.copyText(this.state.idUsuarioAtual)}>
               <Text style={{fontSize: 14, color:'#527fe2'}}>SEU ID: {this.state.idUsuarioAtual}</Text>
             </TouchableOpacity>
+
+            <TouchableOpacity style={{flex:1, flexDirection:'row', width: 120, backgroundColor: '#527fe2', borderRadius:20, padding: 5, marginTop:7}}>
+              <Ionicons name="ios-add-circle" size={24} color="white"/>
+              <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1,
+              shadowColor: "black",
+              shadowOffset: { width: 0, height: 2 },
+              shadowRadius: 4,
+              shadowOpacity: 0.1,
+              elevation: 2,
+              }}
+            >Criar Regra</Text>
+            </TouchableOpacity>
+            
                 <FlatList
                     data={lugaresDisponiveis}
                     renderItem={({item}) =>
