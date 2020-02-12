@@ -91,8 +91,9 @@ class Home extends React.Component {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.articles}>
             
-            <TouchableOpacity onPress={() => this.copyText(this.state.idUsuarioAtual)}>
-              <Text style={{fontSize: 14, color:'#527fe2'}}>SEU ID: {this.state.idUsuarioAtual}</Text>
+            <TouchableOpacity style={{flex:1, width:300, flexDirection:'row', backgroundColor: '#527fe2', padding: 5, borderRadius:7}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
+              <Ionicons name="ios-finger-print" size={19} color="white"/>
+              <Text style={{fontSize: 14, color:'white', fontWeight:'bold', marginLeft: 8}}>{this.state.idUsuarioAtual}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={{flex:1, flexDirection:'row', width: 120, backgroundColor: '#527fe2', borderRadius:20, padding: 5, marginTop:7}}>
