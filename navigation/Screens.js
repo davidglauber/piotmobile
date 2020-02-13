@@ -24,6 +24,7 @@ import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 import Elements from "../screens/Elements";
+import Rules from '../screens/rules/rules';
 import Articles from "../screens/Articles";
 import Login from "../screens/login";
 
@@ -162,6 +163,17 @@ const PresStack = createStackNavigator(
   }
 );
 
+const RulesStack = createStackNavigator(
+  {
+    Rules: {
+      screen: Rules,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header title="Regras" />
+      })
+    }
+  }
+);
+
 const AguaStack = createStackNavigator(
   {
     Agua: {
@@ -256,6 +268,13 @@ const AppStack = createDrawerNavigator(
     Presenca: {
       screen: PresStack,
       navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    Rules: {
+      screen: Rules,
+      navigationOptions: {
+        title: 'Tela de Regras',
         drawerLabel: () => {}
       }
     },

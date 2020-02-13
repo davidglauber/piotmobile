@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
+import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -66,8 +66,14 @@ class Home extends React.Component {
   async copyText(e) {
     await Clipboard.setString(e)
 
-
-    alert('Texto copiado!')
+    Alert.alert(
+      'Aviso!',
+      'Texto Copiado com Sucesso',
+      [
+        {text: 'OK, entendi', onPress: () => console.log('OK Pressed')}
+      ],
+      {cancelable: false},
+    );
   }
   
 
@@ -96,15 +102,9 @@ class Home extends React.Component {
               <Text style={{fontSize: 14, color:'white', fontWeight:'bold', marginLeft: 8}}>{this.state.idUsuarioAtual}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{flex:1, flexDirection:'row', width: 120, backgroundColor: '#527fe2', borderRadius:20, padding: 5, marginTop:7}}>
+            <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flex:1, flexDirection:'row', width: 120, backgroundColor: '#527fe2', borderRadius:20, padding: 5, marginTop:7}}>
               <Ionicons name="ios-add-circle" size={24} color="white"/>
-              <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1,
-              shadowColor: "black",
-              shadowOffset: { width: 0, height: 2 },
-              shadowRadius: 4,
-              shadowOpacity: 0.1,
-              elevation: 2,
-              }}
+              <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1}}
             >Criar Regra</Text>
             </TouchableOpacity>
             
