@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert } from 'react-native';
+import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 //firebase
@@ -16,7 +16,9 @@ class Rules extends React.Component {
         
             return(
                 <ScrollView>
+                    <StatusBar backgroundColor="blue" barStyle="dark-content" />
                         <View style={{backgroundColor: '#527fe2', flex:1, flexDirection: 'row', marginLeft:10, marginRight:10, marginTop:30, borderRadius:20}}>
+                            <StatusBar hidden={false} />
                             <View style={{width: 100, padding: 20}}>
                                 <Image source={require('../presenca.png')} style={{width:85, height:80}} />
                             </View>

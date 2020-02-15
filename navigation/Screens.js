@@ -36,6 +36,7 @@ import DrawerItem from "../components/DrawerItem";
 // header for screens
 import Header from "../components/Header";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 
 const ElementsStack = createStackNavigator({
@@ -144,12 +145,13 @@ const presenceRuleStack = createStackNavigator(
         title: 'Sensor de Presença',
         headerTintColor: '#fff',
         headerLeft: (
-          <Ionicons name="ios-arrow-back" size={27} color="#fff"/>
+          <TouchableHighlight onPress={() => navigation.navigate('Rules')}>
+            <Ionicons name="ios-arrow-back" size={27} color="#fff"/>
+          </TouchableHighlight>
         ),
         headerStyle: {
           backgroundColor: '#527fe2',
           elevation:0,
-          justifyContent: 'center '
         },
         headerLeftContainerStyle: {
           marginLeft:30
