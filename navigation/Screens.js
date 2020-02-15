@@ -15,6 +15,7 @@ import Umidade from '../screens/umidade/umidade';
 import NivelAgua from '../screens/nivelagua/nivelagua';
 import Relatorio from '../screens/relatorios';
 import Presenca from '../screens/presenca/presenca';
+import presenceRule from '../screens/rules/presenceRule';
 import Agua from '../screens/agua/agua';
 import Lampadas from '../screens/lampadas/lampadas';
 import Temperatura from '../screens/temperatura/temperatura';
@@ -34,44 +35,8 @@ import DrawerItem from "../components/DrawerItem";
 
 // header for screens
 import Header from "../components/Header";
+import { Ionicons } from "@expo/vector-icons";
 
-const transitionConfig = (transitionProps, prevTransitionProps) => ({
-  transitionSpec: {
-    duration: 400,
-    easing: Easing.out(Easing.poly(4)),
-    timing: Animated.timing
-  },
-  screenInterpolator: sceneProps => {
-    const { layout, position, scene } = sceneProps;
-    const thisSceneIndex = scene.index;
-    const width = layout.initWidth;
-
-    const scale = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [4, 1, 1]
-    });
-    const opacity = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex, thisSceneIndex + 1],
-      outputRange: [0, 1, 1]
-    });
-    const translateX = position.interpolate({
-      inputRange: [thisSceneIndex - 1, thisSceneIndex],
-      outputRange: [width, 0]
-    });
-
-    const scaleWithOpacity = { opacity };
-    const screenName = "Search";
-
-    if (
-      screenName === transitionProps.scene.route.routeName ||
-      (prevTransitionProps &&
-        screenName === prevTransitionProps.scene.route.routeName)
-    ) {
-      return scaleWithOpacity;
-    }
-    return { transform: [{ translateX }] };
-  }
-});
 
 const ElementsStack = createStackNavigator({
   Elements: {
@@ -84,7 +49,6 @@ const ElementsStack = createStackNavigator({
   cardStyle: {
     backgroundColor: "#F8F9FE"
   },
-  transitionConfig
 });
 
 const ArticlesStack = createStackNavigator({
@@ -98,7 +62,6 @@ const ArticlesStack = createStackNavigator({
   cardStyle: {
     backgroundColor: "#F8F9FE"
   },
-  transitionConfig
 });
 
 const ProfileStack = createStackNavigator(
@@ -115,7 +78,6 @@ const ProfileStack = createStackNavigator(
   },
   {
     cardStyle: { backgroundColor: "#FFFFFF" },
-    transitionConfig
   }
 );
 
@@ -169,6 +131,29 @@ const RulesStack = createStackNavigator(
       screen: Rules,
       navigationOptions: ({ navigation }) => ({
         header: <Header title="Regras" />
+      })
+    }
+  }
+);
+
+const presenceRuleStack = createStackNavigator(
+  {
+    presenceRule: {
+      screen: presenceRule,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Sensor de Presença',
+        headerTintColor: '#fff',
+        headerLeft: (
+          <Ionicons name="ios-arrow-back" size={27} color="#fff"/>
+        ),
+        headerStyle: {
+          backgroundColor: '#527fe2',
+          elevation:0,
+          justifyContent: 'center '
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -253,7 +238,6 @@ const HomeStack = createStackNavigator(
     cardStyle: {
       backgroundColor: "#F8F9FE"
     },
-    transitionConfig
   }
 );
 // divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
@@ -275,6 +259,12 @@ const AppStack = createDrawerNavigator(
       screen: Rules,
       navigationOptions: {
         title: 'Tela de Regras',
+        drawerLabel: () => {}
+      }
+    },
+    presenceRule: {
+      screen: presenceRuleStack,
+      navigationOptions: {
         drawerLabel: () => {}
       }
     },
