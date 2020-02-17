@@ -223,7 +223,7 @@ deleteNotification(e) {
                 <Ionicons
                   size={26}
                   name="md-notifications"
-                  style={{color:'black'}}
+                  style={{color:'gray'}}
                 />
               </TouchableOpacity>
           </View>

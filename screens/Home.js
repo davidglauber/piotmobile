@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert } from 'react-native';
+import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert, StatusBar } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -96,7 +96,10 @@ class Home extends React.Component {
             <ScrollView
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.articles}>
-            
+              
+                <StatusBar backgroundColor="white" barStyle="dark-content" />
+
+
             <TouchableOpacity style={{flex:1, width:300, flexDirection:'row', backgroundColor: '#527fe2', padding: 5, borderRadius:7}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
               <Ionicons name="ios-finger-print" size={19} color="white"/>
               <Text style={{fontSize: 14, color:'white', fontWeight:'bold', marginLeft: 8}}>{this.state.idUsuarioAtual}</Text>
