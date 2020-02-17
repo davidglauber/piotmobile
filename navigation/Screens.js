@@ -131,7 +131,20 @@ const RulesStack = createStackNavigator(
     Rules: {
       screen: Rules,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Regras" />
+        title: 'Tela de Regras',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" size={27} color="#527fe2"/>
+          </TouchableHighlight>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -258,9 +271,8 @@ const AppStack = createDrawerNavigator(
       }
     },
     Rules: {
-      screen: Rules,
+      screen: RulesStack,
       navigationOptions: {
-        title: 'Tela de Regras',
         drawerLabel: () => {}
       }
     },
