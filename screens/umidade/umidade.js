@@ -1,13 +1,15 @@
 import React from 'react';
 import {ScrollView, Image,  StyleSheet, Text, Picker, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
 import { Block, theme } from 'galio-framework';
-import { Ionicons } from '@expo/vector-icons';
-import {Select} from "../../components/";
-
-
 import firebase from '../firebase/firebase';
 
+
+/*
+ Obter dimensão da tela
+*/
 const { width } = Dimensions.get('screen');
+
+
 
 class Umidade extends React.Component {
 
@@ -22,8 +24,6 @@ class Umidade extends React.Component {
 
   async componentDidMount() {
     let e = this;
-    var umidade = this.state.umidade;
-    var lugaresDisponiveis = this.state.lugaresDisponiveis;
 
       await firebase.auth().onAuthStateChanged(function(user) {
       
@@ -76,7 +76,9 @@ class Umidade extends React.Component {
   } 
   
 
-
+  /*
+  Mudar local do sensor
+  */
   onValueChangePlace = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/umidade/${c}`).update({location: e})
@@ -85,17 +87,7 @@ class Umidade extends React.Component {
   
 
   renderArticles = () => {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
     const cardContainer = [styles.card, styles.shadow];
-
-    const imageStyles = [
-      full ? styles.fullImage : styles.horizontalImage,
-      imageStyle
-    ];
-    const imgContainer = [styles.imageContainer,
-      horizontal ? styles.horizontalStyles : styles.verticalStyles,
-      styles.shadow
-    ];
     const lugaresDisponiveis = this.state.lugaresDisponiveis;
     const umidade = this.state.umidade;
 
@@ -198,9 +190,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 1,
     overflow: 'hidden',
-  },
-  image: {
-    // borderRadius: 3,
   },
   horizontalImage: {
     height: 122,

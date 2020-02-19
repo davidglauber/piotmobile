@@ -1,14 +1,7 @@
 import React from 'react';
-
-import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert, StatusBar } from 'react-native';
+import {ScrollView, Image, Text, View, TouchableOpacity, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-//firebase
-import firebase from '../firebase/firebase';
-
-
-const { width } = Dimensions.get('screen');
-const { height } = Dimensions.get('screen');
 
 class Rules extends React.Component {
     render() {

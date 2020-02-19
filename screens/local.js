@@ -13,8 +13,6 @@ import {
   FlatList
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
-
-import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 import firebase from './firebase/firebase';
@@ -49,13 +47,6 @@ class Local extends React.Component {
     const location = this.props.navigation.state.params.local;
     console.log('location parametro: ' + location)
 
-    var lampadas = this.state.lampadas;
-    var agua = this.state.agua;
-    var nivelagua = this.state.nivelagua;
-    var presenca = this.state.presenca;
-    var temperatura = this.state.temperatura;
-    var umidade = this.state.umidade;
-    var lugares = this.state.lugares;
 
     let e = this;
 
@@ -266,7 +257,6 @@ class Local extends React.Component {
 
 
   ligarLampada(e) {
-    const lampadas = this.state.lampadas;
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'ON'})
     })
@@ -275,7 +265,6 @@ class Local extends React.Component {
 
 
   desligarLampada(e) {
-    const lampadas = this.state.lampadas;
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'OFF'})
     })
@@ -283,38 +272,42 @@ class Local extends React.Component {
   }
 
 
+  //Muda a localização
   onValueChangePlace = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/lampadas/${c}`).update({location: e})
     })
   }
 
+  //Muda a localização
   onValueChangePlaceAgua = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/agua/${c}`).update({location: e})
     })
   }
 
+  //Muda a localização
   onValueChangePlaceTemp = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/temperatura/${c}`).update({location: e})
     })
   }
 
-
+  //Muda a localização
   onValueChangePlaceNVAgua = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/nivelagua/${c}`).update({location: e})
     })
   }
 
-
+  //Muda a localização
   onValueChangePlacePresenca = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/presenca/${c}`).update({location: e})
     })
   }
 
+  //Muda a localização
   onValueChangePlaceUmidade = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/umidade/${c}`).update({location: e})

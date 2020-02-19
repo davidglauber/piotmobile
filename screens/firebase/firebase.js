@@ -1,8 +1,6 @@
 import * as firebase from 'firebase';
 // import firestore from 'firebase/firestore';
 
-const settings = { timestampsInSnapshots: true };
-
 const config = {
   apiKey: "AIzaSyBeKqtSlvbjUSWD3fVRTCU0XR0n3HrVN6o",
   authDomain: "iotbeta.firebaseapp.com",

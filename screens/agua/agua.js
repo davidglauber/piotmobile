@@ -1,8 +1,6 @@
 import React from 'react';
 import {ScrollView, Image,  StyleSheet, Text, Picker, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
 import { Block, theme } from 'galio-framework';
-import { Ionicons } from '@expo/vector-icons';
-import {Select} from "../../components/";
 
 
 import firebase from '../firebase/firebase';
@@ -20,10 +18,10 @@ class Agua extends React.Component {
   }
 
 
+
+  /*Acessa o Firebase*/
   async componentDidMount() {
     let e = this;
-    var agua = this.state.agua;
-    var lugaresDisponiveis = this.state.lugaresDisponiveis;
 
       await firebase.auth().onAuthStateChanged(function(user) {
       
@@ -76,7 +74,7 @@ class Agua extends React.Component {
   } 
   
 
-
+  /*Muda valor do select para o lugar que o cliente desejar*/
   onValueChangePlace = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/agua/${c}`).update({location: e})
@@ -85,17 +83,7 @@ class Agua extends React.Component {
   
 
   renderArticles = () => {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
     const cardContainer = [styles.card, styles.shadow];
-
-    const imageStyles = [
-      full ? styles.fullImage : styles.horizontalImage,
-      imageStyle
-    ];
-    const imgContainer = [styles.imageContainer,
-      horizontal ? styles.horizontalStyles : styles.verticalStyles,
-      styles.shadow
-    ];
     const lugaresDisponiveis = this.state.lugaresDisponiveis;
     const agua = this.state.agua;
 
@@ -161,6 +149,7 @@ class Agua extends React.Component {
     )
   }
 
+  /*Renderiza a função renderArticles*/ 
   render() {
     return (
       <Block flex center style={styles.home}>
@@ -198,9 +187,6 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     elevation: 1,
     overflow: 'hidden',
-  },
-  image: {
-    // borderRadius: 3,
   },
   horizontalImage: {
     height: 122,

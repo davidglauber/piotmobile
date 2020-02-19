@@ -1,10 +1,6 @@
 import React from 'react';
 import {ScrollView, Image,  StyleSheet, Text, Picker, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
 import { Block, theme } from 'galio-framework';
-import { Ionicons } from '@expo/vector-icons';
-import {Select} from "../../components/";
-
-
 import firebase from '../firebase/firebase';
 
 const { width } = Dimensions.get('screen');
@@ -21,10 +17,9 @@ class Lampadas extends React.Component {
   }
 
 
+  /*Acessa o Firebase*/
   async componentDidMount() {
     let e = this;
-    var lugaresDisponiveis = this.state.lugaresDisponiveis
-    var lampadasDisponiveis = this.state.lampadasDisponiveis;
 
       await firebase.auth().onAuthStateChanged(function(user) {
         
@@ -79,23 +74,23 @@ class Lampadas extends React.Component {
       
   } 
   
-
+  /*Muda o status para ON no Firebase*/
   ligarLampada(e) {
-    const lampadasDisponiveis = this.state.lampadasDisponiveis;
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'ON'})
     })
 
   }
 
+  /*Muda o status para OFF no Firebase*/
   desligarLampada(e) {
-    const lampadasDisponiveis = this.state.lampadasDisponiveis;
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/lampadas/${e}`).update({status: 'OFF'})
     })
 
   }
 
+  /*Muda o Local da lãmpada*/
   onValueChangePlace = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/lampadas/${c}`).update({location: e})
@@ -104,17 +99,7 @@ class Lampadas extends React.Component {
   
 
   renderArticles = () => {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
     const cardContainer = [styles.card, styles.shadow];
-
-    const imageStyles = [
-      full ? styles.fullImage : styles.horizontalImage,
-      imageStyle
-    ];
-    const imgContainer = [styles.imageContainer,
-      horizontal ? styles.horizontalStyles : styles.verticalStyles,
-      styles.shadow
-    ];
     const lampadasDisponiveis = this.state.lampadasDisponiveis;
     const lugaresDisponiveis = this.state.lugaresDisponiveis;
 

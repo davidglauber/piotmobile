@@ -3,14 +3,10 @@ import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Dimensions, Toucha
 import { Block, theme } from 'galio-framework';
 import { Ionicons } from '@expo/vector-icons';
 
-import { Card } from '../components';
-import articles from '../constants/articles';
-import { argonTheme } from '../constants';
-
+//Obtem as dimensões
 import firebase from './firebase/firebase';
 
 const { width } = Dimensions.get('screen');
-const { height } = Dimensions.get('screen');
 
 class Home extends React.Component {
 
@@ -27,7 +23,6 @@ class Home extends React.Component {
   async componentDidMount() {
     let e = this;
     var lugaresDisponiveis = this.state.lugaresDisponiveis;
-    const idUsuarioAtual = this.state.idUsuarioAtual;
 
       await firebase.auth().onAuthStateChanged(function(user) {
 
@@ -78,7 +73,7 @@ class Home extends React.Component {
   
 
   renderArticles = () => {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
+    const { navigation, horizontal, full, imageStyle } = this.props;
     const cardContainer = [styles.card, styles.shadow];
     const cardContainer2 = [styles.card2, styles.shadow];
 
@@ -98,7 +93,7 @@ class Home extends React.Component {
               contentContainerStyle={styles.articles}>
               
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
-
+                <StatusBar hidden={false} />
 
             <TouchableOpacity style={{flex:1, width:300, flexDirection:'row', backgroundColor: '#527fe2', padding: 5, borderRadius:7}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
               <Ionicons name="ios-finger-print" size={19} color="white"/>

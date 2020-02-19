@@ -29,6 +29,8 @@ class Login extends React.Component {
     }
   }
 
+
+  //Verifica se o usuário é null, se não, ele acessa o app logando pelo firebase
   login() {
     firebase.auth().onAuthStateChanged(function(user) {
         if(user) {
@@ -49,7 +51,8 @@ class Login extends React.Component {
   render() {
     return (
       <Block flex middle>
-        <StatusBar hidden />
+          <StatusBar backgroundColor="white" barStyle="dark-content" />
+          <StatusBar hidden={false} />
         <ImageBackground
           source={Images.Onboarding}
           style={{ width, height, zIndex: 1 }}

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Picker, Image, Text, View, Button, Modal, Dimensions, TouchableOpacity, FlatList, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import firebase from '../firebase/firebase';
 
+/*Pega a dimensão da tela*/
 const { width } = Dimensions.get('screen');
 const { height } = Dimensions.get('screen');
 
@@ -18,10 +18,9 @@ export default class presenceRule extends Component {
     }
   }
 
-
+  /*Acessa o banco de dados*/
   async componentDidMount() {
     let e = this;
-    var presenceList = this.state.presenceList;
 
       await firebase.auth().onAuthStateChanged(function(user) {
       
@@ -49,12 +48,12 @@ export default class presenceRule extends Component {
 
   } 
 
+  /*Abre o modal*/
   openModal() {
-    const isVisible = this.state.isVisible;
-
     this.setState({isVisible: true})
   }
 
+  /*Muda o id do sensor selecionado*/
   onValueChangeIDPresence = (c) => {
     this.setState({presenceID: c})
     console.log('presence ID: ' + c)

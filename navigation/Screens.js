@@ -135,7 +135,7 @@ const RulesStack = createStackNavigator(
         headerTintColor: '#527fe2',
         headerLeft: (
           <TouchableHighlight onPress={() => navigation.navigate('Home')}>
-            <Ionicons name="ios-arrow-back" size={27} color="#527fe2"/>
+            <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
           </TouchableHighlight>
         ),
         headerStyle: {

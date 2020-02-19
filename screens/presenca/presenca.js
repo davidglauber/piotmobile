@@ -1,12 +1,9 @@
 import React from 'react';
 import {ScrollView, Image,  StyleSheet, Text, Picker, View, Button, KeyboardAvoidingView, AsyncStorage, Modal, Switch, Alert, TextInput, ImageBackground, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback } from 'react-native';
 import { Block, theme } from 'galio-framework';
-import { Ionicons } from '@expo/vector-icons';
-import {Select} from "../../components/";
-
-
 import firebase from '../firebase/firebase';
 
+/*Pega a dimensão da tela*/
 const { width } = Dimensions.get('screen');
 
 class Presenca extends React.Component {
@@ -19,11 +16,9 @@ class Presenca extends React.Component {
     }
   }
 
-
+  /*Acessa o Banco de dados*/
   async componentDidMount() {
     let e = this;
-    var presenca = this.state.presenca;
-    var lugaresDisponiveis = this.state.lugaresDisponiveis;
 
       await firebase.auth().onAuthStateChanged(function(user) {
       
@@ -76,7 +71,7 @@ class Presenca extends React.Component {
   } 
   
 
-
+  /*muda o local*/
   onValueChangePlace = (e, c) => {
     firebase.auth().onAuthStateChanged(function(user) {
       firebase.database().ref(`/usuarios/${user.uid}/presenca/${c}`).update({location: e})
@@ -85,18 +80,7 @@ class Presenca extends React.Component {
   
 
   renderArticles = () => {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
     const cardContainer = [styles.card, styles.shadow];
-
-    const imageStyles = [
-      full ? styles.fullImage : styles.horizontalImage,
-      imageStyle
-    ];
-    const imgContainer = [styles.imageContainer,
-      horizontal ? styles.horizontalStyles : styles.verticalStyles,
-      styles.shadow
-    ];
-    const temperatura = this.state.temperatura;
     const lugaresDisponiveis = this.state.lugaresDisponiveis;
     const presenca = this.state.presenca;
 

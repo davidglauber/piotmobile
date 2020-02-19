@@ -8,8 +8,6 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import { Block, Button, Text, theme, Checkbox  } from "galio-framework";
-
-const { height, width } = Dimensions.get("screen");
 import {Icon, Input} from "../components";
 import argonTheme from "../constants/Theme";
 import Images from "../constants/Images";
@@ -17,6 +15,7 @@ import firebase from './firebase/firebase';
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 
+const { height, width } = Dimensions.get("screen");
 class Onboarding extends React.Component {
 
 
@@ -60,8 +59,6 @@ class Onboarding extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
-
     return (
       <Block flex middle>
         <StatusBar hidden />
