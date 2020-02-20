@@ -98,7 +98,7 @@ class Umidade extends React.Component {
 
               { umidade.length == 0  ? 
                 <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-                  <Image style={{width:300, height: 300}} source={require('../404.gif')}/>
+                  <Image style={{width:300, height: 300}} source={require('../assets/imgs/404.gif')}/>
 
 
                   <Text style={{color:'blue', fontWeight:'bold', fontSize:30}}>Página vazia!</Text>
@@ -116,7 +116,7 @@ class Umidade extends React.Component {
                           <TouchableWithoutFeedback>
 
                             <Block flex style={{width: 100}}>
-                                <Image source={require('../umidade.png')} style={{width:150, height:150}} />
+                                <Image source={require('../assets/imgs/umidade.png')} style={{width:150, height:150}} />
                             </Block>
 
                           </TouchableWithoutFeedback>

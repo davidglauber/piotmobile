@@ -61,7 +61,7 @@ class Login extends React.Component {
             <Block style={styles.registerContainer}>
               <Block flex={0.25} middle style={styles.socialConnect}>
                 <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                  <Image style={{width: 80, height:"auto", borderRadius:70}} source={require('./foto.png')}/>                 
+                  <Image style={{width: 80, height:"auto", borderRadius:70}} source={require('../assets/imgs/foto.png')}/>                 
                   <Text style={styles.socialTextButtons}>PioT</Text>
                 </Block>
 

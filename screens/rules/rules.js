@@ -13,7 +13,7 @@ class Rules extends React.Component {
                         <View style={{backgroundColor: '#527fe2', flex:1, flexDirection: 'row', marginLeft:10, marginRight:10, marginTop:30, borderRadius:20}}>
                             <StatusBar hidden={false} />
                             <View style={{width: 100, padding: 20}}>
-                                <Image source={require('../presenca.png')} style={{width:85, height:80}} />
+                                <Image source={require('../assets/imgs/presenca.png')} style={{width:85, height:80}} />
                             </View>
 
                             <View>

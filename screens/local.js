@@ -394,9 +394,9 @@ class Local extends React.Component {
                                 <TouchableWithoutFeedback>
                                   <Block flex style={{width: 100}}>
                                   {item.status === 'ON' ? 
-                                      <Image source={require('./lamp.png')} style={{width:100, height:150}} />
+                                      <Image source={require('../assets/imgs/lamp.png')} style={{width:100, height:150}} />
                                       : 
-                                      <Image source={require('./lampOFF.png')} style={{width:100, height:150}} />
+                                      <Image source={require('../assets/imgs/lampOFF.png')} style={{width:100, height:150}} />
                                   }
                                   </Block>
                                 </TouchableWithoutFeedback>
@@ -462,7 +462,7 @@ class Local extends React.Component {
                           <TouchableWithoutFeedback>
 
                             <Block flex style={{width: 100}}>
-                                <Image source={require('./drop.png')} style={{width:150, height:150}} />
+                                <Image source={require('../assets/imgs/drop.png')} style={{width:150, height:150}} />
                             </Block>
 
                           </TouchableWithoutFeedback>
@@ -520,7 +520,7 @@ class Local extends React.Component {
                           <TouchableWithoutFeedback>
 
                             <Block flex style={{width: 100}}>
-                                <Image source={require('./presenca.png')} style={{width:150, height:150}} />
+                                <Image source={require('../assets/imgs/presenca.png')} style={{width:150, height:150}} />
                             </Block>
 
                           </TouchableWithoutFeedback>
@@ -580,7 +580,7 @@ class Local extends React.Component {
                           <TouchableWithoutFeedback>
 
                             <Block flex style={{width: 100}}>
-                                <Image source={require('./cold.png')} style={{width:100, height:150}} />
+                                <Image source={require('../assets/imgs/cold.png')} style={{width:100, height:150}} />
                             </Block>
 
                           </TouchableWithoutFeedback>
@@ -639,7 +639,7 @@ class Local extends React.Component {
                           <TouchableWithoutFeedback>
 
                             <Block flex style={{width: 100}}>
-                                <Image source={require('./umidade.png')} style={{width:150, height:150}} />
+                                <Image source={require('../assets/imgs/umidade.png')} style={{width:150, height:150}} />
                             </Block>
 
                           </TouchableWithoutFeedback>
@@ -695,7 +695,7 @@ class Local extends React.Component {
                           <TouchableWithoutFeedback>
 
                             <Block flex style={{width: 100}}>
-                                <Image source={require('./flood.png')} style={{width:150, height:150}} />
+                                <Image source={require('../assets/imgs/flood.png')} style={{width:150, height:150}} />
                             </Block>
 
                           </TouchableWithoutFeedback>

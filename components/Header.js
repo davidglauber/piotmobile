@@ -5,8 +5,6 @@ import { Button, Block, NavBar, Text, theme } from 'galio-framework';
 import firebase from '../screens/firebase/firebase'; 
 import Icon from './Icon';
 import Input from './Input';
-
-import { Images } from "../constants";
 import { Ionicons } from '@expo/vector-icons';
 import Tabs from './Tabs';
 import argonTheme from '../constants/Theme';
@@ -157,7 +155,7 @@ deleteNotification(e) {
             >
               <View style={{flex: 1, marginTop: height / 2, backgroundColor: '#6f97f2', borderRadius: 20}}>
                   <View style={{flexDirection:'column', alignContent:'center', alignItems:'center'}}>
-                    <Image source={require('../screens/foto.png')} style={{width: 120, height:70}}></Image>
+                    <Image source={require('../assets/imgs/foto.png')} style={{width: 120, height:70}}></Image>
                       <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>
                           <View style={{padding:5, borderRadius:5, backgroundColor:'white'}}>
                             <Text style={{fontSize: 20, fontWeight: 'bold', color:'black'}}>Sensores e Atuadores</Text>
@@ -179,7 +177,7 @@ deleteNotification(e) {
 
                         {notifications.length == 0 ?
                           <View style={{flex:1, justifyContent:'center', alignItems:'center', alignContent:'center'}}>
-                            <Image style={{marginTop:200, width:400, height: 200}} source={require('../screens/404.gif')}/>
+                            <Image style={{marginTop:200, width:400, height: 200}} source={require('../assets/imgs/404.gif')}/>
           
           
                             <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>Sem Notificações!</Text>

@@ -63,7 +63,7 @@ export default class presenceRule extends Component {
     return (
         <View style={{flex:1}}>
             <View style={{flex:0.5, backgroundColor:'#527fe2', justifyContent:'center', alignItems:'center'}}>
-                <Image source={require('../presenca.png')} style={{width:155, height:155}}/>
+                <Image source={require('../assets/imgs/presenca.png')} style={{width:155, height:155}}/>
                 <Text style={{color: '#ffffff', fontWeight: 'bold', fontSize:25}}>Sensor de Presença</Text>
                 <Text style={{color: '#fff', marginLeft: 20, marginRight:10, marginTop: 20, fontStyle:'italic'}}>Crie regras como: ligue a luz quando perceber movimento, desative o ar condicionado quando alguem entrar</Text>
             </View>

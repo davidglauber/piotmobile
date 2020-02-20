@@ -1,5 +1,4 @@
 import React from "react";
-import { Easing, Animated } from "react-native";
 import {
   createStackNavigator,
   createDrawerNavigator,
@@ -7,7 +6,6 @@ import {
 } from "react-navigation";
 
 import { Block } from "galio-framework";
-import firebase from '../screens/firebase/firebase';
 
 // screens
 import Home from "../screens/Home";
@@ -36,7 +34,7 @@ import DrawerItem from "../components/DrawerItem";
 // header for screens
 import Header from "../components/Header";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 
 const ElementsStack = createStackNavigator({
@@ -134,9 +132,9 @@ const RulesStack = createStackNavigator(
         title: 'Tela de Regras',
         headerTintColor: '#527fe2',
         headerLeft: (
-          <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
             <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
-          </TouchableHighlight>
+          </TouchableOpacity>
         ),
         headerStyle: {
           backgroundColor: '#fff',
@@ -158,9 +156,9 @@ const presenceRuleStack = createStackNavigator(
         title: 'Sensor de Presença',
         headerTintColor: '#fff',
         headerLeft: (
-          <TouchableHighlight onPress={() => navigation.navigate('Rules')}>
+          <TouchableOpacity style={{padding:5}}  onPress={() => navigation.navigate('Rules')}>
             <Ionicons name="ios-arrow-back" size={27} color="#fff"/>
-          </TouchableHighlight>
+          </TouchableOpacity>
         ),
         headerStyle: {
           backgroundColor: '#527fe2',
@@ -204,9 +202,9 @@ const LocalStack = createStackNavigator(
         title: 'Local',
         headerTintColor: '#527fe2',
         headerLeft: (
-          <TouchableHighlight onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity style={{padding:5}}  onPress={() => navigation.navigate('Home')}>
             <Ionicons name="ios-arrow-back" size={27} color="#527fe2"/>
-          </TouchableHighlight>
+          </TouchableOpacity>
         ),
         headerStyle: {
           backgroundColor: '#fff',

@@ -144,7 +144,7 @@ class Home extends React.Component {
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Lampadas')}>
                       <Block flex style={{width: 100, padding: 20}}>
-                        <Image source={require('./lamp.png')} style={{width:55, height:80}} />
+                        <Image source={require('../assets/imgs/lamp.png')} style={{width:55, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Lampadas')}>
@@ -159,7 +159,7 @@ class Home extends React.Component {
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Presenca')}>
                       <Block flex style={{width: 100, padding: 20}}>
-                        <Image source={require('./presenca.png')} style={{width:80, height:80}}/>
+                        <Image source={require('../assets/imgs/presenca.png')} style={{width:80, height:80}}/>
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Presenca')}>
@@ -175,7 +175,7 @@ class Home extends React.Component {
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
                       <Block flex style={{width: 100, padding:20}}>
-                        <Image source={require('./cold.png')} style={{width:60, height:80}} />
+                        <Image source={require('../assets/imgs/cold.png')} style={{width:60, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Temperatura')}>
@@ -192,7 +192,7 @@ class Home extends React.Component {
                   <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Agua')}>
                       <Block flex style={{width: 100, padding:20}}>
-                        <Image source={require('./drop.png')} style={{width:65, height:80}} />
+                        <Image source={require('../assets/imgs/drop.png')} style={{width:65, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Agua')}>
@@ -208,7 +208,7 @@ class Home extends React.Component {
                    <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Umidade')}>
                       <Block flex style={{width: 100, padding:20}}>
-                        <Image source={require('./umidade.png')} style={{width:78, height:80}} />
+                        <Image source={require('../assets/imgs/umidade.png')} style={{width:78, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('Umidade')}>
@@ -224,7 +224,7 @@ class Home extends React.Component {
                    <Block card flex style={cardContainer2}>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('NivelAgua')}>
                       <Block flex style={{width: 100, padding:20}}>
-                        <Image source={require('./flood.png')} style={{width:65, height:80}} />
+                        <Image source={require('../assets/imgs/flood.png')} style={{width:65, height:80}} />
                       </Block>
                     </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={() => navigation.navigate('NivelAgua')}>
