@@ -95,10 +95,15 @@ class Home extends React.Component {
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <StatusBar hidden={false} />
 
-            <TouchableOpacity style={{flex:1, width:300, flexDirection:'row', backgroundColor: '#527fe2', padding: 5, borderRadius:7}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
+          <View style={{flex:1,flexDirection:"row"}}>
+            <TouchableOpacity style={{width:560, backgroundColor: '#527fe2', padding: 5, borderRadius:7}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
               <Ionicons name="ios-finger-print" size={19} color="white"/>
-              <Text style={{fontSize: 14, color:'white', fontWeight:'bold', marginLeft: 8}}>{this.state.idUsuarioAtual}</Text>
+              <Text style={{fontSize: 14, color:'white', fontWeight:'bold', marginLeft: 8}}>ID</Text>
             </TouchableOpacity>
+              
+              <Text style={{fontSize: 14, color:'#527fe2', fontWeight:'bold', marginLeft: 8}}>{this.state.idUsuarioAtual}</Text>
+          </View>
+
 
             <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flex:1, flexDirection:'row', width: 120, backgroundColor: '#527fe2', borderRadius:20, padding: 5, marginTop:7}}>
               <Ionicons name="ios-add-circle" size={24} color="white"/>
