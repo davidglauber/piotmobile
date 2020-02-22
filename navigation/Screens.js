@@ -4,7 +4,7 @@ import {
   createDrawerNavigator,
   createAppContainer
 } from "react-navigation";
-
+import firebase from '../screens/firebase/firebase';
 import { Block } from "galio-framework";
 
 // screens
@@ -242,12 +242,38 @@ const LampStack = createStackNavigator(
   }
 );
 
+
 const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Tela Principal" />
+        title: 'Tela Principal',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}}  onPress={() => navigation.openDrawer()}>
+            <Ionicons name="ios-apps" size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerRight: (
+          <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{padding: 12, position: 'relative'}}>
+                <Ionicons
+                  size={26}
+                  name="ios-exit"
+                  style={{color:'#527fe2'}}
+                />
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:10
+        },
+        headerRightContainerStyle: {
+          marginRight:10
+        }
       })
     },
     Pro: {

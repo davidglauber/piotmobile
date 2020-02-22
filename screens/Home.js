@@ -97,7 +97,7 @@ class Home extends React.Component {
 
           <View style={{flex:1, flexDirection: 'row'}}>
 
-          <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flexDirection:'row', width: 200, backgroundColor: '#527fe2', borderRadius:7, padding: 5, marginTop:7, marginRight:10}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flexDirection:'row', width: 200, backgroundColor: '#527fe2', borderRadius:7, padding: 5, marginTop:7, marginRight:15}}>
               <Ionicons name="ios-add-circle" size={24} color="white"/>
               <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1}}
             >Criar Regra</Text>
@@ -107,6 +107,15 @@ class Home extends React.Component {
               <Ionicons name="ios-finger-print" size={19} color="white"/>
               <Text style={{fontSize: 15, color:'white', fontWeight:'bold', marginLeft: 8}}>ID</Text>
             </TouchableOpacity>
+
+
+            <TouchableOpacity style={{flexDirection:"row",width:30, height:30, backgroundColor: '#527fe2', padding: 5, borderRadius:7, marginTop:10, marginLeft:15}} onPress={() => this.logout()}>
+                <Ionicons
+                  size={19}
+                  name="md-notifications"
+                  style={{color:'#fff', marginLeft:3}}
+                />
+              </TouchableOpacity>
             
           </View>
 
