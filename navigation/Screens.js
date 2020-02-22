@@ -269,7 +269,8 @@ const HomeStack = createStackNavigator(
           elevation:0,
         },
         headerLeftContainerStyle: {
-          marginLeft:10
+          marginLeft:10,
+          marginRight:100
         },
         headerRightContainerStyle: {
           marginRight:10

@@ -108,8 +108,6 @@ class Header extends React.Component {
 
 
   openNotifications() {
-    const isVisible = this.state.isVisible;
-
     this.setState({isVisible: true})
   }
 
@@ -153,7 +151,7 @@ deleteNotification(e) {
                 visible={this.state.isVisible}
                 onRequestClose={() => this.setState({isVisible: false})}
             >
-              <View style={{flex: 1, marginTop: height / 2, backgroundColor: '#6f97f2', borderRadius: 20}}>
+              <View style={{flex: 1, marginTop: height / 2, backgroundColor: '#6f97f2', borderRadius: 20, elevation:10}}>
                   <View style={{flexDirection:'column', alignContent:'center', alignItems:'center'}}>
                     <Image source={require('../assets/imgs/foto.png')} style={{width: 120, height:70}}></Image>
                       <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>

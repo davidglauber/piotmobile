@@ -1,12 +1,12 @@
 import React from 'react';
-import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert, StatusBar } from 'react-native';
+import {ScrollView, Image, StyleSheet,Clipboard , Text, View, Dimensions, TouchableOpacity, FlatList, TouchableWithoutFeedback, Alert, StatusBar, Modal } from 'react-native';
 import { Block, theme } from 'galio-framework';
 import { Ionicons } from '@expo/vector-icons';
 
 //Obtem as dimensões
 import firebase from './firebase/firebase';
 
-const { width } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 class Home extends React.Component {
 
@@ -16,6 +16,8 @@ class Home extends React.Component {
       location: '',
       lugaresDisponiveis:[],
       idUsuarioAtual: '',
+      isVisible: false,
+      notifications:[]
     }
   }
 
@@ -55,7 +57,67 @@ class Home extends React.Component {
       })
       console.log('Lista de locais: ' + lugaresDisponiveis)
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      await firebase.auth().onAuthStateChanged(function(user) {
+
+        if(user) {
+            let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/notificacoes`)
+            
+            firebaseGET.on('value', (snap) => {
+  
+            var notif = [];
+            snap.forEach((child) => {
+              
+                notif.push({
+                  id: child.val().id,
+                  message: child.val().message
+                });
+  
+            });
+            
+            e.setState({
+              notifications: notif
+            });
+          });
+        }
+      })
+
+      console.log('notificao: ' + this.state.notifications)
   } 
+
+
+  
+  openNotifications() {
+    console.log('entrou na funcao not')
+    var isVisible = this.state.isVisible;
+
+    this.setState({isVisible: true})
+  }
+
+
+
+  deleteNotification(e) {
+    firebase.auth().onAuthStateChanged(function(user) {
+
+      if(user) {
+        firebase.database().ref(`/usuarios/${user.uid}/notificacoes/${e}`).remove()
+      }
+    
+  })
+}
 
 
   async copyText(e) {
@@ -76,6 +138,8 @@ class Home extends React.Component {
     const { navigation, horizontal, full, imageStyle } = this.props;
     const cardContainer = [styles.card, styles.shadow];
     const cardContainer2 = [styles.card2, styles.shadow];
+    var isVisible = this.state.isVisible;
+    const notifications = this.state.notifications;
 
     const imageStyles = [
       full ? styles.fullImage : styles.horizontalImage,
@@ -97,6 +161,69 @@ class Home extends React.Component {
 
           <View style={{flex:1, flexDirection: 'row'}}>
 
+            {/*Modal*/}
+            <Modal
+                transparent={true}
+                animationType="slide"
+                visible={isVisible}
+                onRequestClose={() => this.setState({isVisible: false})}
+            >
+              <View style={{flex: 1, marginTop: height / 2, backgroundColor: '#6f97f2', borderRadius: 20}}>
+                  <View style={{flexDirection:'column', alignContent:'center', alignItems:'center'}}>
+                    <Image source={require('../assets/imgs/foto.png')} style={{width: 120, height:70}}></Image>
+                      <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>
+                          <View style={{padding:5, borderRadius:5, backgroundColor:'white'}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold', color:'black'}}>Sensores e Atuadores</Text>
+                          </View>
+
+                          <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
+                            <Ionicons 
+                              name='md-exit'
+                              size={29}
+                              style={{color: 'white', marginLeft: 50}}
+                            />
+                          </TouchableOpacity>
+
+
+                      </View>
+
+
+                      <View style={{marginTop:50}}>
+
+                        {notifications.length == 0 ?
+                          <View style={{flex:1, justifyContent:'center', alignItems:'center', alignContent:'center'}}>
+                            <Image style={{marginTop:200, width:400, height: 200}} source={require('../assets/imgs/404.gif')}/>
+          
+          
+                            <Text style={{color:'black', fontWeight:'bold', fontSize:20}}>Sem Notificações!</Text>
+                          </View>
+                        :
+
+                          <FlatList 
+                            data={notifications}
+                            keyExtractor={item => item.id}
+                            renderItem={({item}) => 
+
+                                <View style={{flexDirection:'column', width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
+                                  <View style={{ flexDirection:'row'}}>
+                                    <Text style={{color:'#878787'}}>{item.id}</Text>
+                                    <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
+                                                <Ionicons style={{color: 'green', marginLeft: 140}} name='md-checkbox' size={27}/>
+                                    </TouchableOpacity>
+                                  </View>
+                                  <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
+                                </View>
+                              
+                          
+
+                          } />
+                        }
+                        
+                      </View>
+                  </View>
+              </View>
+            </Modal>
+
           <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flexDirection:'row', width: 200, backgroundColor: '#527fe2', borderRadius:7, padding: 5, marginTop:7, marginRight:15}}>
               <Ionicons name="ios-add-circle" size={24} color="white"/>
               <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1}}
@@ -109,7 +236,8 @@ class Home extends React.Component {
             </TouchableOpacity>
 
 
-            <TouchableOpacity style={{flexDirection:"row",width:30, height:30, backgroundColor: '#527fe2', padding: 5, borderRadius:7, marginTop:10, marginLeft:15}} onPress={() => this.logout()}>
+            {/*abre o modal de notificações*/}
+            <TouchableOpacity style={{flexDirection:"row",width:30, height:30, backgroundColor: '#527fe2', padding: 5, borderRadius:7, marginTop:10, marginLeft:15}} onPress={() => this.openNotifications()}>
                 <Ionicons
                   size={19}
                   name="md-notifications"
@@ -123,7 +251,6 @@ class Home extends React.Component {
                     data={lugaresDisponiveis}
                     renderItem={({item}) =>
                 <View>
-
                     <Block flex row>
                         <Block card flex style={cardContainer}>
                           <TouchableWithoutFeedback onPress={() => navigation.navigate('Local', {
