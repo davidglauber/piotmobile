@@ -61,7 +61,8 @@ class Onboarding extends React.Component {
   render() {
     return (
       <Block flex middle>
-        <StatusBar hidden />
+        <StatusBar backgroundColor="white" barStyle="white-content" />
+        <StatusBar hidden={false} />
         <ImageBackground
           source={Images.Onboarding}
           style={{ width, height, zIndex: 1 }}

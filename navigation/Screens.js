@@ -96,7 +96,20 @@ const TempStack = createStackNavigator(
     Temperatura: {
       screen: Temperatura,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Sensores de Temperatura" />
+        title: 'Sensores de Temperatura',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -107,7 +120,20 @@ const RelatorioStack = createStackNavigator(
     Relatorio: {
       screen: Relatorio,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Relatórios de Gastos" />
+        title: 'Sensores de Temperatura',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -118,7 +144,20 @@ const PresStack = createStackNavigator(
     Presenca: {
       screen: Presenca,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Sensores de Presenca" />
+        title: 'Sensores de Presença',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -177,7 +216,20 @@ const AguaStack = createStackNavigator(
     Agua: {
       screen: Agua,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Sensores de Água" />
+        title: 'Sensores de Água',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -188,7 +240,20 @@ const NivelStack = createStackNavigator(
     NivelAgua: {
       screen: NivelAgua,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Sensores de Nível de Água" />
+        title: 'Nível de Água',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}}  onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -224,7 +289,20 @@ const UmidadeStack = createStackNavigator(
     Umidade: {
       screen: Umidade,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Sensores de Umidade" />
+        title: 'Sensores de Umidade',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}}  onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -236,7 +314,20 @@ const LampStack = createStackNavigator(
     Lampadas: {
       screen: Lampadas,
       navigationOptions: ({ navigation }) => ({
-        header: <Header title="Lâmpadas" />
+        title: 'Lâmpadas',
+        headerTintColor: '#527fe2',
+        headerLeft: (
+          <TouchableOpacity style={{padding:5}}  onPress={() => navigation.navigate('Home')}>
+            <Ionicons name="ios-arrow-back" size={27} color="#527fe2"/>
+          </TouchableOpacity>
+        ),
+        headerStyle: {
+          backgroundColor: '#fff',
+          elevation:0,
+        },
+        headerLeftContainerStyle: {
+          marginLeft:30
+        }
       })
     }
   }
@@ -321,7 +412,7 @@ const AppStack = createDrawerNavigator(
       }
     },
     NivelAgua: {
-      screen: NivelAgua,
+      screen: NivelStack,
       navigationOptions: {
         drawerLabel: () => {}
       }
@@ -380,35 +471,28 @@ const AppStack = createDrawerNavigator(
     },
     Profile: {
       screen: ProfileStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Profile" title="Profile" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
     },
     Account: {
       screen: Register,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Register" title="Account" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+
     },
     Elements: {
       screen: ElementsStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Elements" title="Elements" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
     },
     Articles: {
       screen: ArticlesStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Articles" title="Articles" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
     }
   },
   Menu

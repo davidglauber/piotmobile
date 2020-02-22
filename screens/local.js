@@ -9,7 +9,7 @@ import {
   ImageBackground, 
   TouchableWithoutFeedback,
   TouchableOpacity,
-  Platform, 
+  StatusBar, 
   FlatList
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
@@ -344,6 +344,9 @@ class Local extends React.Component {
               showsVerticalScrollIndicator={false}
               style={{ width, marginTop: '25%' }}
             >
+              <StatusBar backgroundColor="white" barStyle="white-content" />
+              <StatusBar hidden={false} />
+                
               <Block flex style={styles.profileCard}>
                 <Block middle style={styles.avatarContainer}>
                   <Image

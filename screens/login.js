@@ -51,7 +51,7 @@ class Login extends React.Component {
   render() {
     return (
       <Block flex middle>
-          <StatusBar backgroundColor="white" barStyle="dark-content" />
+          <StatusBar backgroundColor="white" barStyle="white-content" />
           <StatusBar hidden={false} />
         <ImageBackground
           source={Images.Onboarding}
