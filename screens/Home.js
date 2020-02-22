@@ -62,8 +62,8 @@ class Home extends React.Component {
     await Clipboard.setString(e)
 
     Alert.alert(
-      'Aviso!',
-      'Texto Copiado com Sucesso',
+      `${this.state.idUsuarioAtual}`,
+      'ID Copiado com Sucesso',
       [
         {text: 'OK, entendi', onPress: () => console.log('OK Pressed')}
       ],
@@ -95,22 +95,21 @@ class Home extends React.Component {
                 <StatusBar backgroundColor="white" barStyle="dark-content" />
                 <StatusBar hidden={false} />
 
-          <View style={{flex:1,flexDirection:"row"}}>
-            <TouchableOpacity style={{width:560, backgroundColor: '#527fe2', padding: 5, borderRadius:7}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
-              <Ionicons name="ios-finger-print" size={19} color="white"/>
-              <Text style={{fontSize: 14, color:'white', fontWeight:'bold', marginLeft: 8}}>ID</Text>
-            </TouchableOpacity>
-              
-              <Text style={{fontSize: 14, color:'#527fe2', fontWeight:'bold', marginLeft: 8}}>{this.state.idUsuarioAtual}</Text>
-          </View>
+          <View style={{flex:1, flexDirection: 'row'}}>
 
-
-            <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flex:1, flexDirection:'row', width: 120, backgroundColor: '#527fe2', borderRadius:20, padding: 5, marginTop:7}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flexDirection:'row', width: 200, backgroundColor: '#527fe2', borderRadius:7, padding: 5, marginTop:7, marginRight:10}}>
               <Ionicons name="ios-add-circle" size={24} color="white"/>
               <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1}}
             >Criar Regra</Text>
             </TouchableOpacity>
             
+            <TouchableOpacity style={{flexDirection:"row",width:60, height:30, backgroundColor: '#527fe2', padding: 5, borderRadius:7, marginTop:10}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>
+              <Ionicons name="ios-finger-print" size={19} color="white"/>
+              <Text style={{fontSize: 15, color:'white', fontWeight:'bold', marginLeft: 8}}>ID</Text>
+            </TouchableOpacity>
+            
+          </View>
+
                 <FlatList
                     data={lugaresDisponiveis}
                     renderItem={({item}) =>
