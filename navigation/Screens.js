@@ -4,7 +4,6 @@ import {
   createDrawerNavigator,
   createAppContainer
 } from "react-navigation";
-import firebase from '../screens/firebase/firebase';
 import { Block } from "galio-framework";
 
 // screens
@@ -120,15 +119,15 @@ const RelatorioStack = createStackNavigator(
     Relatorio: {
       screen: Relatorio,
       navigationOptions: ({ navigation }) => ({
-        title: 'Sensores de Temperatura',
-        headerTintColor: '#527fe2',
+        title: 'Relatório de Consumo',
+        headerTintColor: '#fff',
         headerLeft: (
-          <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
-            <Ionicons name="ios-arrow-back" sty size={27} color="#527fe2"/>
+          <TouchableOpacity style={{padding:5}} onPress={() => navigation.openDrawer()}>
+            <Ionicons name="ios-apps" sty size={27} color="#fff"/>
           </TouchableOpacity>
         ),
         headerStyle: {
-          backgroundColor: '#fff',
+          backgroundColor: '#527fe2',
           elevation:0,
         },
         headerLeftContainerStyle: {
