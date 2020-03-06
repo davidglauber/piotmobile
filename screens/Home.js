@@ -168,19 +168,19 @@ class Home extends React.Component {
                 visible={isVisible}
                 onRequestClose={() => this.setState({isVisible: false})}
             >
-              <View style={{flex: 1, marginTop: height / 2, backgroundColor: '#6f97f2', borderRadius: 20}}>
-                  <View style={{flexDirection:'column', alignContent:'center', alignItems:'center'}}>
+              <View style={{flex: 1, marginTop: 300, marginLeft:10,marginRight:10, backgroundColor: '#f0f4ee', borderRadius: 20}}>
+                  <ScrollView contentContainerStyle={{flexDirection:'column', alignContent:'center', alignItems:'center'}}>
                     <Image source={require('../assets/imgs/foto.png')} style={{width: 120, height:70}}></Image>
                       <View style={{flexDirection:'row'  , justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop:10}}>
-                          <View style={{padding:5, borderRadius:5, backgroundColor:'white'}}>
-                            <Text style={{fontSize: 20, fontWeight: 'bold', color:'black'}}>Sensores e Atuadores</Text>
+                          <View style={{padding:5, borderRadius:5, backgroundColor:'#527fe2'}}>
+                            <Text style={{fontSize: 20, fontWeight: 'bold', color:'#fff'}}>Sensores e Atuadores</Text>
                           </View>
 
                           <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
                             <Ionicons 
                               name='md-exit'
                               size={29}
-                              style={{color: 'white', marginLeft: 50}}
+                              style={{color: '#527fe2', marginLeft: 50}}
                             />
                           </TouchableOpacity>
 
@@ -204,11 +204,11 @@ class Home extends React.Component {
                             keyExtractor={item => item.id}
                             renderItem={({item}) => 
 
-                                <View style={{flexDirection:'column', width: width - 20, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 10, padding:10}}>
+                                <View style={{flexDirection:'column', width: width - 30, marginTop:40, backgroundColor:'#eaeaea', borderRadius: 15, marginLeft:5,marginRight:5, padding:10}}>
                                   <View style={{ flexDirection:'row'}}>
                                     <Text style={{color:'#878787'}}>{item.id}</Text>
                                     <TouchableOpacity onPress={() => this.deleteNotification(item.id)}>
-                                                <Ionicons style={{color: 'green', marginLeft: 140}} name='md-checkbox' size={27}/>
+                                                <Ionicons style={{color: '#527fe2', marginLeft: 140}} name='md-checkbox' size={27}/>
                                     </TouchableOpacity>
                                   </View>
                                   <Text style={{fontWeight: 'bold'}}>{item.message}</Text>
@@ -220,7 +220,7 @@ class Home extends React.Component {
                         }
                         
                       </View>
-                  </View>
+                  </ScrollView>
               </View>
             </Modal>
 
