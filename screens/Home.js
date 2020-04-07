@@ -227,7 +227,7 @@ class Home extends React.Component {
           <TouchableOpacity onPress={() => navigation.navigate('Rules')} style={{flexDirection:'row', width: 200, backgroundColor: '#527fe2', borderRadius:7, padding: 5, marginTop:7, marginRight:15}}>
               <Ionicons name="ios-add-circle" size={24} color="white"/>
               <Text style={{color:'white', fontWeight:'bold', fontSize:15, marginLeft: 8, marginTop:1}}
-            >Criar Regra</Text>
+            >Criar um Local</Text>
             </TouchableOpacity>
             
             <TouchableOpacity style={{flexDirection:"row",width:60, height:30, backgroundColor: '#527fe2', padding: 5, borderRadius:7, marginTop:10}} onPress={() => this.copyText(this.state.idUsuarioAtual)}>

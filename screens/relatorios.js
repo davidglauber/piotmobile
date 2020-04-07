@@ -1,10 +1,12 @@
 import React, { Component, useState } from 'react';
-import {Text, View, Dimensions} from 'react-native';
+import {Text, View, Dimensions, StatusBar} from 'react-native';
 import {
   LineChart,
 } from 'react-native-chart-kit';
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import firebase from './firebase/firebase';
+
 
 
 const lineSemanal = {
@@ -28,29 +30,61 @@ const lineMensal = {
 };
 
 
-const lineDiaria = {
-  labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-  datasets: [
-    {
-      data: [40, 10, 105, 77, 100, 33],
-      strokeWidth: 3, // optional
-    },
-  ],
-};
-
-
 //atualiza o type que dependendo vai renderizar um tipo de gráfico diferente 
 
 export default class Relatorio extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      type: 2
+      type: 2,
+      valores: [100,131,40, 3,6,1]
     };
   }
 
+  async componentDidMount() {
+    const valores = this.state.valores;
+    let e = this;
+
+
+    await firebase.auth().onAuthStateChanged(function(user) {
+      if ( user == null ) { 
+        e.props.navigation.navigate('Login')
+      }
+
+      let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/medidor`)
+        firebaseGET.on('value', (snap) => {
+          console.log('valor da lista : ' + snap.val())
+          var med = [];
+              snap.forEach((child) => {
+                
+                  med.push({
+                    valor: child.val().valor
+                  });
+
+              });
+              
+              e.setState({
+                valores: med
+              });
+        });
+
+    })
+
+  }
+
+
   render_graphic() {
     const type = this.state.type;
+    
+    const lineDiaria = {
+      labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+      datasets: [
+        {
+          data: [100,131,40, 3,6,1],
+          strokeWidth: 3, // optional
+        },
+      ],
+    };
 
 
     console.log("type: " + type);
@@ -133,6 +167,8 @@ export default class Relatorio extends Component {
   render() {
     return(
         <View>
+
+          <StatusBar backgroundColor="#527FE2" barStyle="dark-content" />
         {/*Mostra o grafico de acordo com o type*/}
         {this.render_graphic()}
 

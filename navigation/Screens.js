@@ -167,7 +167,7 @@ const RulesStack = createStackNavigator(
     Rules: {
       screen: Rules,
       navigationOptions: ({ navigation }) => ({
-        title: 'Tela de Regras',
+        title: 'Adicionar Local',
         headerTintColor: '#527fe2',
         headerLeft: (
           <TouchableOpacity style={{padding:5}} onPress={() => navigation.navigate('Home')}>
