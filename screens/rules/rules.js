@@ -62,7 +62,7 @@ export default class Rules extends React.Component{
         let e = this;
         var storageUrl = 'locais/';
 
-            getFileBlob(imageURL, blob =>{
+            getFileBlob(imageURL, blob => {
                 firebase.storage().ref(`${storageUrl}/${e.state.input}`).put(blob).then(function(snapshot) {
                    console.log('Uploaded a blob or file!');
                 })
@@ -81,6 +81,7 @@ export default class Rules extends React.Component{
                       url: urlLocal
                     })
                 alert('Lugar Cadastrado com Sucesso')
+                e.props.navigation.navigate('Home')
               })
             })
         })
