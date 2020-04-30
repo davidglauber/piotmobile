@@ -37,12 +37,11 @@ export default class Relatorio extends Component {
     super(props);
     this.state = {
       type: 2,
-      valores: [100,131,40, 3,6,1]
+      valores: []
     };
   }
 
   async componentDidMount() {
-    const valores = this.state.valores;
     let e = this;
 
 
@@ -53,11 +52,11 @@ export default class Relatorio extends Component {
 
       let firebaseGET = firebase.database().ref(`usuarios/${user.uid}/medidor`)
         firebaseGET.on('value', (snap) => {
-          console.log('valor da lista : ' + snap.val())
-          var med = [];
+
+          let med = [];
               snap.forEach((child) => {
-                
                   med.push({
+                    id: child.val().id,
                     valor: child.val().valor
                   });
 
@@ -66,21 +65,39 @@ export default class Relatorio extends Component {
               e.setState({
                 valores: med
               });
+
+              console.log('valor da lista state : ' + e.state.valores)
         });
 
     })
 
   }
 
-
   render_graphic() {
+    console.log('valor da lista state2 : ' + JSON.stringify(this.state.valores))
     const type = this.state.type;
-    
+    let n1 = 0;
+    let n2 = 0;
+    let n3 = 0;
+    let n4 = 0;
+    let n5 = 0;
+    let n6 = 0;
+
+    this.state.valores.map(v => {
+      n1 = (v.valor[0])
+      n2 = (v.valor[1])
+      n3 = (v.valor[2])
+      n4 = (v.valor[3])
+      n5 = (v.valor[4])
+      n5 = (v.valor[5])
+    });
+
+
     const lineDiaria = {
       labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
       datasets: [
         {
-          data: [100,131,40, 3,6,1],
+          data: [n1, n2, n3, n4, n5, n6],
           strokeWidth: 3, // optional
         },
       ],
